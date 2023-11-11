@@ -1,5 +1,6 @@
+import Routing from "./Routing";
 function App() {
-  return <div>aaa</div>;
+  return <Routing />;
 }
 
 export default App;
