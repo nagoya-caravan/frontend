@@ -1,5 +1,9 @@
+import Mordal from "./components/mordal";
+
 function App() {
-  return <div>aaa</div>;
+  return (
+  <Mordal/>
+  );
 }
 
 export default App;
