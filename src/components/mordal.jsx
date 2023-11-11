@@ -1,9 +1,6 @@
 import * as React from "react";
-import Box from "@mui/material/Box";
-import Modal from "@mui/material/Modal";
-import Button from "@mui/material/Button";
+import { Box, Button, Modal, Typography } from "@mui/material";
 import HighlightOffSharpIcon from "@mui/icons-material/HighlightOffSharp";
-import "../styles/mordal.scss";
 
 const style = {
   position: "absolute",
@@ -44,10 +41,10 @@ export default function NestedModal() {
               sx={{ position: "absolute", right: "30px" }}
             />
           </Box>
-          <h2 id="parent-modal-title">これであってますか？</h2>
-          <p id="parent-modal-description">
-            あってたらボタンを入力してください。
-          </p>
+          <Typography>
+            これであってますか?
+            <br /> あってたらボタンを入力してください。
+          </Typography>
         </Box>
       </Modal>
     </div>
