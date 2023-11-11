@@ -1,9 +1,9 @@
-import React, { FC, useState } from "react";
+import { useState } from "react";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import { Input, Typography } from "@mui/material";
 
-export const URLPopup: FC = () => {
+export const URLPopup = () => {
   const [open, setOpen] = useState(false);
   const [inputURL, setInputURL] = useState(""); // 1. URL state
 
@@ -21,7 +21,7 @@ export const URLPopup: FC = () => {
       <Modal open={open} onClose={handleClose}>
         <Box
           sx={{
-            position: "absolute" as "absolute",
+            position: "absolute",
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
