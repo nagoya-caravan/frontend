@@ -1,7 +1,12 @@
-import { Routes } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
+import TopPage from "./views/TopPage";
 
-const routing = () => {
-  return <Routes></Routes>;
+const Routing = () => {
+  return (
+    <Routes>
+      <Route path='/' element={<TopPage />} />
+    </Routes>
+  );
 };
 
-export default routing;
+export default Routing;
