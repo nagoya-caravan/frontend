@@ -1,11 +1,10 @@
-import React, { useState, useEffect, use } from "react";
+import React, { useState, useEffect } from "react";
 import moment from "moment";
 import Box from "@mui/material/Box";
 import { Button, Chip, Typography } from "@mui/material";
-import { ChangeMonth } from "./useChangeMonth";
-const Calendar = React.memo(() => {
-  const { currentMonth, setCurrentMonth, handleNextMonth, handlePrevMonth } =
-    ChangeMonth();
+import { ChangeMonth } from "../hooks/useChangeMonth";
+const CalendarComponent = () => {
+  const { currentMonth, handleNextMonth, handlePrevMonth } = ChangeMonth();
 
   const [calendar, setCalendar] = useState([]);
 
@@ -231,6 +230,6 @@ const Calendar = React.memo(() => {
       </Box>
     </Box>
   );
-});
-
+};
+const Calendar = React.memo(CalendarComponent, () => "Calendar");
 export default Calendar;
