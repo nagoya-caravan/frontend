@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import TopPage from "./views/TopPage";
 
-const routing = () => {
+const Routing = () => {
   return (
     <Routes>
       <Route path='/' element={<TopPage />} />
@@ -9,4 +9,4 @@ const routing = () => {
   );
 };
 
-export default routing;
+export default Routing;
