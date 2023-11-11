@@ -5,14 +5,11 @@ import { Input, Typography } from "@mui/material";
 
 export const URLPopup = () => {
   const [open, setOpen] = useState(false);
-  const [inputURL, setInputURL] = useState(""); // 1. URL state
+  const [inputURL, setInputURL] = useState("");
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
-  const urlValidation =
-    /^https:\/\/calendar\.google\.com\/calendar\/ical\/[a-zA-Z0-9._%+-]+%40gmail\.com\/public\/basic\.ics$/;
-
+  const urlValidation = /^(https?:\/\/).*/;
   const isValidURL = urlValidation.test(inputURL);
 
   return (
