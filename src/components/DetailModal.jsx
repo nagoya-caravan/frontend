@@ -16,7 +16,7 @@ const style = {
   pb: 3,
 };
 
-export default function NestedModal() {
+export default function DetailModal() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => {
     setOpen(true);
@@ -31,8 +31,8 @@ export default function NestedModal() {
       <Modal
         open={open}
         onClose={handleClose}
-        aria-labelledby="parent-modal-title"
-        aria-describedby="parent-modal-description"
+        aria-labelledby='parent-modal-title'
+        aria-describedby='parent-modal-description'
       >
         <Box sx={{ ...style, width: 400 }}>
           <Box>
