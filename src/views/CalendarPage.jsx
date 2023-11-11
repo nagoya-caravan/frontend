@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
-
-const Calendar = () => {
+import Calendar from "../components/Calendar";
+const CalendarPage = () => {
   return (
     <Box>
       <Typography>Calendar</Typography>
@@ -9,4 +9,4 @@ const Calendar = () => {
   );
 };
 
-export default Calendar;
+export default CalendarPage;
