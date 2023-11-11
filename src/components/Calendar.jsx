@@ -12,7 +12,8 @@ const CalendarComponent = () => {
     const start = currentMonth.clone(); //ここで月初を取得
     const end = moment(start).endOf("month"); //ここで月末を取得
     const newCalendar = [];
-
+    console.log(start);
+    console.log(end);
     const dayOfWeek = start.day(); //ここで月初の曜日を取得
 
     const prevMonthEnd = start.clone().subtract(1, "day"); //ここで先月末を取得
@@ -125,7 +126,7 @@ const CalendarComponent = () => {
         }}
       >
         <Button
-          variant="outlined"
+          variant='outlined'
           sx={{
             my: 2,
           }}
@@ -135,7 +136,7 @@ const CalendarComponent = () => {
         </Button>
         {currentMonth.format("YYYY年M月")}
         <Button
-          variant="outlined"
+          variant='outlined'
           sx={{
             my: 2,
           }}
