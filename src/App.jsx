@@ -1,8 +1,6 @@
-import Routing from "./Routing";
+import CalendarList from "./views/CalendarList";
 function App() {
-
-  return <Routing />;
-
+  return <CalendarList />;
 }
 
 export default App;
