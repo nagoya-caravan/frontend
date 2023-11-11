@@ -125,7 +125,7 @@ const CalendarComponent = () => {
         }}
       >
         <Button
-          variant='outlined'
+          variant="outlined"
           sx={{
             my: 2,
           }}
@@ -135,7 +135,7 @@ const CalendarComponent = () => {
         </Button>
         {currentMonth.format("YYYY年M月")}
         <Button
-          variant='outlined'
+          variant="outlined"
           sx={{
             my: 2,
           }}
