@@ -1,9 +1,8 @@
-import "mount";
-const WeekCalendar = ({ year, month }) => {
-  const weeksOfMonth = getMonthData(year, month); // 月初めの日付と曜日を計算する
+import { useMemo } from "react";
+import moment from "moment";
 
-  // 月初めの日付と曜日を計算する関数
-  const getMonthData = (year, month) => {
+const WeekCalendar = (year, month) => {
+  const weeksOfMonth = useMemo(() => {
     const firstDayOfMonth = moment([year, month]);
     const firstDayOfWeek = firstDayOfMonth.day();
 
@@ -25,7 +24,8 @@ const WeekCalendar = ({ year, month }) => {
       }
     }
     return weeks; // 週の配列を返す
-  };
+  }, [year, month]); // 依存配列。yearまたはmonthが変更されたときのみ再計算されます。
+
   return (
     <div>
       {weeksOfMonth.map((week, index) => (
