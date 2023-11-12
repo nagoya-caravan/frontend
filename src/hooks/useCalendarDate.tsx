@@ -1,6 +1,5 @@
-import { Box, Button } from "@mui/material";
 import moment from "moment";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const useCalendarDate = () => {
   const [currentYearMonth, setCurrentYearMonth] = useState(moment());
@@ -10,6 +9,7 @@ const useCalendarDate = () => {
   const handlePrevMonth = () => {
     setCurrentYearMonth(currentYearMonth.clone().subtract(1, "months"));
   };
+  useEffect(() => {}, [currentYearMonth]);
   return { currentYearMonth, handleNextMonth, handlePrevMonth };
 };
 
