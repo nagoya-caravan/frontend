@@ -1,6 +1,6 @@
 import { useState } from "react";
 import moment from "moment";
-import { Box, Button } from "@mui/material";
+import Box from "@mui/material/Box";
 // 月初めの日付と曜日を計算する関数
 const getMonthData = (year, month) => {
   const firstDayOfMonth = moment([year, month]);
@@ -26,43 +26,36 @@ const getMonthData = (year, month) => {
   return weeks; // 週の配列を返す
 };
 
-const WeekCalendar = (year, month) => {
+const WeekRow = ({ week }) => {
+  return (
+    <Box display={{ xs: "none", md: "flex" }}>
+      {week.map((day) => (
+        <Box key={day.date} className='day'>
+          {day.date}
+        </Box>
+      ))}
+    </Box>
+  );
+};
+
+const WeekCalendar = ({ year, month }) => {
   const weeksOfMonth = getMonthData(year, month); // 月初めの日付と曜日を計算する
 
   return (
     <div>
       {weeksOfMonth.map((week, index) => (
-        <div key={index} className='week-row'>
-          {week.map((day) => (
-            <div key={day.date} className='day'>
-              {day.date} ({moment().day(day.dayOfWeek).format("ddd")})
-            </div>
-          ))}
-        </div>
+        <WeekRow key={index} week={week} />
       ))}
     </div>
   );
 };
 
+// カレンダーコンポーネントの利用例
 const Calendar = () => {
   const [currentYearMonth, setCurrentYearMonth] = useState(moment());
 
   return (
     <>
-      <Button
-        onClick={() =>
-          setCurrentYearMonth(currentYearMonth.clone().subtract(1, "months"))
-        }
-      >
-        Previous Month
-      </Button>
-      <Button
-        onClick={() =>
-          setCurrentYearMonth(currentYearMonth.clone().add(1, "months"))
-        }
-      >
-        Next Month
-      </Button>
       <Box
         sx={{
           width: "100%",
@@ -145,12 +138,25 @@ const Calendar = () => {
         >
           土
         </Box>
-
-        <WeekCalendar
-          year={currentYearMonth.year()}
-          month={currentYearMonth.month()}
-        />
       </Box>
+      <WeekCalendar
+        year={currentYearMonth.year()}
+        month={currentYearMonth.month()}
+      />
+      <button
+        onClick={() =>
+          setCurrentYearMonth(currentYearMonth.clone().subtract(1, "months"))
+        }
+      >
+        Previous Month
+      </button>
+      <button
+        onClick={() =>
+          setCurrentYearMonth(currentYearMonth.clone().add(1, "months"))
+        }
+      >
+        Next Month
+      </button>
     </>
   );
 };
