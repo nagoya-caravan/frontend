@@ -32,7 +32,6 @@ const getMonthData = (year, month) => {
       weeks[0].unshift({ date: daysInMonth, dayOfWeek: currentWeek });
       daysInMonth--;
     }
-
     // 月末の週の日付が七日間に満たない場合、翌月の日付を配列に格納する
     if (weeks[weeks.length - 1].length !== 7) {
       const daysToAdd = 7 - weeks[weeks.length - 1].length;
@@ -46,7 +45,7 @@ const getMonthData = (year, month) => {
 };
 const WeekRow = ({ week, lastWeek }) => {
   return (
-    <Box d>
+    <Box display={{ xs: "none", md: "flex" }}>
       {week.map((day) =>
         lastWeek ? (
           <Box
