@@ -24,7 +24,6 @@ import FoodBankIcon from "@mui/icons-material/FoodBank";
 import GamesIcon from "@mui/icons-material/Games";
 import GroupsIcon from "@mui/icons-material/Groups";
 import MeetingRoomIcon from "@mui/icons-material/MeetingRoom";
-import { Outlet } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -107,87 +106,48 @@ export default function MiniDrawer() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  // Appbarのopenをboxに入れるとヘッダ消えるかも
-  return (
-    <>
-      <Box sx={{ display: "flex" }}>
-        <CssBaseline />
-        {/* AppBar */}
-        <AppBar position='fixed' open={open}>
-          <Toolbar>
-            {/* ハンバーガーメニュー */}
-            <IconButton
-              color='inherit'
-              aria-label='open drawer'
-              onClick={handleDrawerOpen}
-              edge='start'
-              sx={{
-                marginRight: 5,
-                ...(open && { display: "none" }),
-              }}
-            >
-              <WidgetsIcon />
-            </IconButton>
-            <Typography variant='h6' noWrap component='div'>
-              SideBar Testing
-            </Typography>
-          </Toolbar>
-        </AppBar>
 
-        {/* Drawer */}
-        <CustomDrawer variant='permanent' open={open}>
-          <DrawerHeader>
-            <IconButton onClick={handleDrawerClose}>
-              {theme.direction === "rtl" ? (
-                <ChevronRightIcon />
-              ) : (
-                <ChevronLeftIcon />
-              )}
-            </IconButton>
-          </DrawerHeader>
-          <Divider />
-          {/* List 1 */}
-          <List>
-            {["This Month", "Today", "Check Events", "Edit"].map(
-              (text, index) => (
-                <ListItem key={text} disablePadding sx={{ display: "block" }}>
-                  <ListItemButton
-                    sx={{
-                      minHeight: 48,
-                      justifyContent: open ? "initial" : "center",
-                      px: 2.5,
-                    }}
-                  >
-                    <ListItemIcon
-                      sx={{
-                        minWidth: 0,
-                        mr: open ? 3 : "auto",
-                        justifyContent: "center",
-                      }}
-                    >
-                      {index === 0 ? (
-                        <CalendarMonthIcon />
-                      ) : index === 1 ? (
-                        <CalendarTodayIcon />
-                      ) : index === 2 ? (
-                        <EventAvailableIcon />
-                      ) : (
-                        <EditCalendarIcon />
-                      )}
-                    </ListItemIcon>
-                    <ListItemText
-                      primary={text}
-                      sx={{ opacity: open ? 1 : 0 }}
-                    />
-                  </ListItemButton>
-                </ListItem>
-              )
+  return (
+    <Box sx={{ display: "flex" }}>
+      <CssBaseline />
+      {/* AppBar */}
+      <AppBar position="fixed" open={open}>
+        <Toolbar>
+          {/* ハンバーガーメニュー */}
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            onClick={handleDrawerOpen}
+            edge="start"
+            sx={{
+              marginRight: 5,
+              ...(open && { display: "none" }),
+            }}
+          >
+            <WidgetsIcon />
+          </IconButton>
+          <Typography variant="h6" noWrap component="div">
+            SideBar Testing
+          </Typography>
+        </Toolbar>
+      </AppBar>
+
+      {/* Drawer */}
+      <CustomDrawer variant="permanent" open={open}>
+        <DrawerHeader>
+          <IconButton onClick={handleDrawerClose}>
+            {theme.direction === "rtl" ? (
+              <ChevronRightIcon />
+            ) : (
+              <ChevronLeftIcon />
             )}
-          </List>
-          <Divider />
-          {/* List 2 */}
-          <List>
-            {["Food", "Games", "Meeting", "Friends"].map((text, index) => (
+          </IconButton>
+        </DrawerHeader>
+        <Divider />
+        {/* List 1 */}
+        <List>
+          {["This Month", "Today", "Check Events", "Edit"].map(
+            (text, index) => (
               <ListItem key={text} disablePadding sx={{ display: "block" }}>
                 <ListItemButton
                   sx={{
@@ -204,27 +164,61 @@ export default function MiniDrawer() {
                     }}
                   >
                     {index === 0 ? (
-                      <FoodBankIcon />
+                      <CalendarMonthIcon />
                     ) : index === 1 ? (
-                      <GamesIcon />
+                      <CalendarTodayIcon />
                     ) : index === 2 ? (
-                      <MeetingRoomIcon />
+                      <EventAvailableIcon />
                     ) : (
-                      <GroupsIcon />
+                      <EditCalendarIcon />
                     )}
                   </ListItemIcon>
                   <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
                 </ListItemButton>
               </ListItem>
-            ))}
-          </List>
-        </CustomDrawer>
-        {/* Main Content */}
-        <Box component='main' sx={{ flexGrow: 1, p: 3 }}>
-          <DrawerHeader />
-        </Box>
+            )
+          )}
+        </List>
+        <Divider />
+        {/* List 2 */}
+        <List>
+          {["Food", "Games", "Meeting", "Friends"].map((text, index) => (
+            <ListItem key={text} disablePadding sx={{ display: "block" }}>
+              <ListItemButton
+                sx={{
+                  minHeight: 48,
+                  justifyContent: open ? "initial" : "center",
+                  px: 2.5,
+                }}
+              >
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : "auto",
+                    justifyContent: "center",
+                  }}
+                >
+                  {index === 0 ? (
+                    <FoodBankIcon />
+                  ) : index === 1 ? (
+                    <GamesIcon />
+                  ) : index === 2 ? (
+                    <MeetingRoomIcon />
+                  ) : (
+                    <GroupsIcon />
+                  )}
+                </ListItemIcon>
+                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
+      </CustomDrawer>
+      {/* Main Content */}
+      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+        <DrawerHeader />
+        <Typography paragraph>サイドバーのテストです。</Typography>
       </Box>
-      <Outlet />
-    </>
+    </Box>
   );
 }
