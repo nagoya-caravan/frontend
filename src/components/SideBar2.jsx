@@ -108,6 +108,7 @@ export default function MiniDrawer() {
   };
 
   return (
+    // Appbarのopenをboxに入れるとヘッダ消えるかも
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
       {/* AppBar */}
