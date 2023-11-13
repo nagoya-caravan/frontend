@@ -25,13 +25,19 @@ const getMonthData = (year, month) => {
     }
   }
 
-  //月初めの日の曜日が日曜日でない場合、先月の日付を配列に格納する
+  //月初めの週の日付が七日間に満たない場合、先月の日付を配列に格納する
   if (firstDayOfWeek !== 0) {
-    const lastMonth = moment(firstDayOfMonth).subtract(1, "months");
-    const lastDayOfLastMonth = lastMonth.daysInMonth();
-    const startDayOfLastMonth = lastDayOfLastMonth - firstDayOfWeek + 1;
-    for (let day = startDayOfLastMonth; day <= lastDayOfLastMonth; day++) {
-      weeks[0].unshift({ date: day, dayOfWeek: currentWeek });
+    const daysToAdd = firstDayOfWeek;
+    for (let day = 1; day <= daysToAdd; day++) {
+      weeks[0].unshift({ date: daysInMonth, dayOfWeek: currentWeek });
+      daysInMonth--;
+    }
+    // 月末の週の日付が七日間に満たない場合、翌月の日付を配列に格納する
+    if (weeks[weeks.length - 1].length !== 7) {
+      const daysToAdd = 7 - weeks[weeks.length - 1].length;
+      for (let day = 1; day <= daysToAdd; day++) {
+        weeks[weeks.length - 1].push({ date: day, dayOfWeek: currentWeek });
+      }
     }
 
     return weeks;
