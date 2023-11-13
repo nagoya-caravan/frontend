@@ -1,5 +1,5 @@
 import moment from "moment";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const useYearMonth = () => {
   const [currentYearMonth, setCurrentYearMonth] = useState(moment());

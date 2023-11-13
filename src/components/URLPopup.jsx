@@ -1,20 +1,19 @@
 import { useState } from "react";
-import Modal from "@mui/material/Modal";
-import Box from "@mui/material/Box";
-import { Input, Typography } from "@mui/material";
+
+import { Button, Input, Typography, Modal, Box } from "@mui/material";
 
 export const URLPopup = () => {
   const [open, setOpen] = useState(false);
   const [inputURL, setInputURL] = useState("");
-
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
   const urlValidation = /^(https?:\/\/).*/;
   const isValidURL = urlValidation.test(inputURL);
 
   return (
     <div>
-      <button onClick={handleOpen}>Open Modal</button>
+      <Button onClick={handleOpen}>Open Modal</Button>
       <Modal open={open} onClose={handleClose}>
         <Box
           sx={{

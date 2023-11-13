@@ -1,8 +1,7 @@
-import { useState } from "react";
 import moment from "moment";
 import { Button, Box, Typography } from "@mui/material";
 import styled from "styled-components";
-import useYearMonth from "../hooks/useYearMonth";
+import useYearMonth from "../../hooks/useYearMonth";
 // 月初めの日付と曜日を計算する関数
 const getMonthData = (year, month) => {
   const firstDayOfMonth = moment([year, month]);
@@ -33,6 +32,7 @@ const getMonthData = (year, month) => {
       weeks[0].unshift({ date: daysInMonth, dayOfWeek: currentWeek });
       daysInMonth--;
     }
+
     // 月末の週の日付が七日間に満たない場合、翌月の日付を配列に格納する
     if (weeks[weeks.length - 1].length !== 7) {
       const daysToAdd = 7 - weeks[weeks.length - 1].length;
@@ -46,7 +46,7 @@ const getMonthData = (year, month) => {
 };
 const WeekRow = ({ week, lastWeek }) => {
   return (
-    <Box display={{ xs: "none", md: "flex" }}>
+    <Box d>
       {week.map((day) =>
         lastWeek ? (
           <Box
