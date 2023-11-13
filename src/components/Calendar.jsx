@@ -1,6 +1,6 @@
 import { useState } from "react";
 import moment from "moment";
-import { Button, Box } from "@mui/material";
+import { Button, Box, Typography } from "@mui/material";
 import styled from "styled-components";
 // 月初めの日付と曜日を計算する関数
 const getMonthData = (year, month) => {
@@ -44,8 +44,6 @@ const getMonthData = (year, month) => {
   }
 };
 const WeekRow = ({ week, lastWeek }) => {
-  console.log(week);
-
   return (
     <Box display={{ xs: "none", md: "flex" }}>
       {week.map((day) =>
@@ -69,7 +67,7 @@ const WeekRow = ({ week, lastWeek }) => {
             sx={{
               aspectRatio: "1 / 1",
               border: "1px #111 solid",
-              width: "20%",
+              width: "40%",
             }}
           >
             {day.date}
@@ -81,14 +79,13 @@ const WeekRow = ({ week, lastWeek }) => {
 };
 
 const WeekCalendar = ({ year, month }) => {
-  const weeksOfMonth = getMonthData(year, month); // 月初めの日付と曜日を計算する
-
+  const weeksOfMonth = getMonthData(year, month); // 月初めの日付と曜日を計算する関数
   return (
-    <div>
+    <Box>
       {weeksOfMonth.map((week, index) => (
         <WeekRow key={index} week={week} />
       ))}
-    </div>
+    </Box>
   );
 };
 
@@ -98,6 +95,44 @@ const Calendar = () => {
 
   return (
     <>
+      <Box>
+        <Typography variant='h4'>
+          {currentYearMonth.format("YYYY年MM月")}
+        </Typography>
+        <Button
+          variant='outlined'
+          onClick={() =>
+            setCurrentYearMonth(currentYearMonth.clone().subtract(1, "years"))
+          }
+        >
+          Previous Year
+        </Button>
+        <Button
+          variant='outlined'
+          onClick={() =>
+            setCurrentYearMonth(currentYearMonth.clone().subtract(1, "months"))
+          }
+        >
+          Previous Month
+        </Button>
+
+        <Button
+          variant='outlined'
+          onClick={() =>
+            setCurrentYearMonth(currentYearMonth.clone().add(1, "months"))
+          }
+        >
+          Next Month
+        </Button>
+        <Button
+          variant='outlined'
+          onClick={() =>
+            setCurrentYearMonth(currentYearMonth.clone().add(1, "years"))
+          }
+        >
+          Next Year
+        </Button>
+      </Box>
       <Box
         sx={{
           width: "100%",
@@ -122,20 +157,6 @@ const Calendar = () => {
         year={currentYearMonth.year()}
         month={currentYearMonth.month()}
       />
-      <Button
-        onClick={() =>
-          setCurrentYearMonth(currentYearMonth.clone().subtract(1, "months"))
-        }
-      >
-        Previous Month
-      </Button>
-      <button
-        onClick={() =>
-          setCurrentYearMonth(currentYearMonth.clone().add(1, "months"))
-        }
-      >
-        Next Month
-      </button>
     </>
   );
 };
