@@ -2,6 +2,7 @@ import { useState } from "react";
 import moment from "moment";
 import { Button, Box, Typography } from "@mui/material";
 import styled from "styled-components";
+import useYearMonth from "../hooks/useYearMonth";
 // 月初めの日付と曜日を計算する関数
 const getMonthData = (year, month) => {
   const firstDayOfMonth = moment([year, month]);
@@ -91,7 +92,13 @@ const WeekCalendar = ({ year, month }) => {
 
 // カレンダーコンポーネントの利用例
 const Calendar = () => {
-  const [currentYearMonth, setCurrentYearMonth] = useState(moment());
+  const {
+    currentYearMonth,
+    handleNextMonth,
+    handlePrevMonth,
+    handleNextYear,
+    handlePrevYear,
+  } = useYearMonth();
 
   return (
     <>
@@ -99,37 +106,17 @@ const Calendar = () => {
         <Typography variant='h4'>
           {currentYearMonth.format("YYYY年MM月")}
         </Typography>
-        <Button
-          variant='outlined'
-          onClick={() =>
-            setCurrentYearMonth(currentYearMonth.clone().subtract(1, "years"))
-          }
-        >
+        <Button variant='outlined' onClick={handlePrevYear}>
           Previous Year
         </Button>
-        <Button
-          variant='outlined'
-          onClick={() =>
-            setCurrentYearMonth(currentYearMonth.clone().subtract(1, "months"))
-          }
-        >
+        <Button variant='outlined' onClick={handlePrevMonth}>
           Previous Month
         </Button>
 
-        <Button
-          variant='outlined'
-          onClick={() =>
-            setCurrentYearMonth(currentYearMonth.clone().add(1, "months"))
-          }
-        >
+        <Button variant='outlined' onClick={handleNextMonth}>
           Next Month
         </Button>
-        <Button
-          variant='outlined'
-          onClick={() =>
-            setCurrentYearMonth(currentYearMonth.clone().add(1, "years"))
-          }
-        >
+        <Button variant='outlined' onClick={handleNextYear}>
           Next Year
         </Button>
       </Box>
