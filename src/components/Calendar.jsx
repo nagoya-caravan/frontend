@@ -1,6 +1,7 @@
 import { useState } from "react";
 import moment from "moment";
-import Box from "@mui/material/Box";
+import { Button, Box } from "@mui/material";
+import styled from "styled-components";
 // 月初めの日付と曜日を計算する関数
 const getMonthData = (year, month) => {
   const firstDayOfMonth = moment([year, month]);
@@ -23,17 +24,52 @@ const getMonthData = (year, month) => {
       currentWeek++; // 曜日カウンターを進める
     }
   }
-  return weeks; // 週の配列を返す
-};
 
-const WeekRow = ({ week }) => {
+  //月初めの日の曜日が日曜日でない場合、先月の日付を配列に格納する
+  if (firstDayOfWeek !== 0) {
+    const lastMonth = moment(firstDayOfMonth).subtract(1, "months");
+    const lastDayOfLastMonth = lastMonth.daysInMonth();
+    const startDayOfLastMonth = lastDayOfLastMonth - firstDayOfWeek + 1;
+    for (let day = startDayOfLastMonth; day <= lastDayOfLastMonth; day++) {
+      weeks[0].unshift({ date: day, dayOfWeek: currentWeek });
+    }
+
+    return weeks;
+  }
+};
+const WeekRow = ({ week, lastWeek }) => {
+  console.log(week);
+
   return (
     <Box display={{ xs: "none", md: "flex" }}>
-      {week.map((day) => (
-        <Box key={day.date} className='day'>
-          {day.date}
-        </Box>
-      ))}
+      {week.map((day) =>
+        lastWeek ? (
+          <Box
+            key={day.date}
+            sx={{
+              aspectRatio: "1 / 1",
+              border: "1px #111 solid",
+              width: "100%",
+              backgroundColor: "#eee",
+              justifyContent: "flex-end",
+              alignItems: "center",
+            }}
+          >
+            {day.date}
+          </Box>
+        ) : (
+          <Box
+            key={day.date}
+            sx={{
+              aspectRatio: "1 / 1",
+              border: "1px #111 solid",
+              width: "20%",
+            }}
+          >
+            {day.date}
+          </Box>
+        )
+      )}
     </Box>
   );
 };
@@ -68,88 +104,25 @@ const Calendar = () => {
           borderRight: "solid 1px #111",
         }}
       >
-        <Box
-          sx={{
-            textAlign: "center",
-            color: "#111",
-            borderTop: "solid 1px #111",
-
-            borderBottom: "1px solid #111",
-          }}
-        >
-          日
-        </Box>
-        <Box
-          sx={{
-            textAlign: "center",
-            borderTop: "solid 1px #111",
-
-            borderBottom: "1px solid #111",
-          }}
-        >
-          月
-        </Box>
-        <Box
-          sx={{
-            textAlign: "center",
-            borderTop: "solid 1px #111",
-
-            borderBottom: "1px solid #111",
-          }}
-        >
-          火
-        </Box>
-        <Box
-          sx={{
-            textAlign: "center",
-            borderTop: "solid 1px #111",
-            borderBottom: "1px solid #111",
-          }}
-        >
-          水
-        </Box>
-        <Box
-          sx={{
-            textAlign: "center",
-            borderTop: "solid 1px #111",
-            borderBottom: "1px solid #111",
-          }}
-        >
-          木
-        </Box>
-        <Box
-          sx={{
-            textAlign: "center",
-            borderTop: "solid 1px #111",
-
-            borderBottom: "1px solid #111",
-          }}
-        >
-          金
-        </Box>
-        <Box
-          sx={{
-            textAlign: "center",
-            color: "#111",
-            borderTop: "solid 1px #111",
-
-            borderBottom: "1px solid #111",
-          }}
-        >
-          土
-        </Box>
+        <DayOfTheWeek>日</DayOfTheWeek>
+        <DayOfTheWeek>月</DayOfTheWeek>
+        <DayOfTheWeek>火</DayOfTheWeek>
+        <DayOfTheWeek>水</DayOfTheWeek>
+        <DayOfTheWeek>木</DayOfTheWeek>
+        <DayOfTheWeek>金</DayOfTheWeek>
+        <DayOfTheWeek>土</DayOfTheWeek>
       </Box>
       <WeekCalendar
         year={currentYearMonth.year()}
         month={currentYearMonth.month()}
       />
-      <button
+      <Button
         onClick={() =>
           setCurrentYearMonth(currentYearMonth.clone().subtract(1, "months"))
         }
       >
         Previous Month
-      </button>
+      </Button>
       <button
         onClick={() =>
           setCurrentYearMonth(currentYearMonth.clone().add(1, "months"))
@@ -162,3 +135,9 @@ const Calendar = () => {
 };
 
 export default Calendar;
+
+const DayOfTheWeek = styled(Box)`
+  text-align: center;
+  border-top: solid 1px #111;
+  border-bottom: 1px solid #111;
+`;
