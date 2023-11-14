@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { Button, Input, Typography, Modal, Box } from "@mui/material";
 
-export const URLPopup = () => {
+const URLPopup = () => {
   const [open, setOpen] = useState(false);
   const [inputURL, setInputURL] = useState("");
   const handleOpen = () => setOpen(true);
@@ -12,8 +12,10 @@ export const URLPopup = () => {
   const isValidURL = urlValidation.test(inputURL);
 
   return (
-    <div>
-      <Button onClick={handleOpen}>Open Modal</Button>
+    <>
+      <Button variant='outlined' onClick={handleOpen}>
+        カレンダー作成
+      </Button>
       <Modal open={open} onClose={handleClose}>
         <Box
           sx={{
@@ -48,8 +50,17 @@ export const URLPopup = () => {
           {!isValidURL && inputURL && (
             <Typography color='error'>URLが間違っています</Typography>
           )}
+          <Button
+            variant='contained'
+            onClick={handleClose}
+            disabled={!isValidURL}
+          >
+            作成
+          </Button>
         </Box>
       </Modal>
-    </div>
+    </>
   );
 };
+
+export default URLPopup;

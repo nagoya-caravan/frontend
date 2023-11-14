@@ -1,5 +1,6 @@
 import { Box, Button, Typography } from "@mui/material";
-
+import { Link } from "react-router-dom";
+import URLPopup from "../components/URLPopup";
 const TopPage = () => {
   return (
     <>
@@ -25,8 +26,12 @@ const TopPage = () => {
             p: 2,
           }}
         >
-          <Button variant='contained'>カレンダー作成</Button>
-          <Button variant='contained'>カレンダー編集</Button>
+          <URLPopup />
+          <Box>
+            <Link to='/list'>
+              <Button variant='outlined'>カレンダー編集</Button>
+            </Link>
+          </Box>
         </Box>
       </Box>
     </>
