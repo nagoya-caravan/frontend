@@ -2,6 +2,7 @@ import moment from "moment";
 import { Button, Box, Typography, TextField } from "@mui/material";
 import styled from "styled-components";
 import useYearMonth from "../../hooks/useYearMonth";
+
 // 月初めの日付と曜日を計算する関数
 const getMonthData = (year, month) => {
   const firstDayOfMonth = moment([year, month]);
@@ -112,7 +113,7 @@ const Calendar = () => {
         <TextField
           sx={{ ml: "160px" }}
           placeholder={currentYearMonth.format("YYYY/MM")}
-          typeof='text'
+          typeof="text"
           //enterキーで年月を変更する
           onKeyPress={(e) => {
             if (e.key === "Enter") {
@@ -128,20 +129,20 @@ const Calendar = () => {
           }}
         />
 
-        <Typography variant='h4'>
+        <Typography variant="h4">
           {currentYearMonth.format("YYYY年MM月")}
         </Typography>
-        <Button variant='outlined' onClick={handlePrevYear}>
+        <Button variant="outlined" onClick={handlePrevYear}>
           Previous Year
         </Button>
-        <Button variant='outlined' onClick={handlePrevMonth}>
+        <Button variant="outlined" onClick={handlePrevMonth}>
           Previous Month
         </Button>
 
-        <Button variant='outlined' onClick={handleNextMonth}>
+        <Button variant="outlined" onClick={handleNextMonth}>
           Next Month
         </Button>
-        <Button variant='outlined' onClick={handleNextYear}>
+        <Button variant="outlined" onClick={handleNextYear}>
           Next Year
         </Button>
       </Box>

@@ -2,6 +2,8 @@ import * as React from "react";
 import { Box, Button, Modal, Typography } from "@mui/material";
 import HighlightOffSharpIcon from "@mui/icons-material/HighlightOffSharp";
 
+// タイトル、日付、要件、一般公開（チェックボックスをつける）、submitボタンをつける
+
 const style = {
   position: "absolute",
   top: "50%",
@@ -27,12 +29,14 @@ export default function DetailModal() {
 
   return (
     <div>
-      <Button onClick={handleOpen}>ここをクリック</Button>
+      <Button onClick={handleOpen} sx={{ backgroundColor: "green" }}>
+        Click Here
+      </Button>
       <Modal
         open={open}
         onClose={handleClose}
-        aria-labelledby='parent-modal-title'
-        aria-describedby='parent-modal-description'
+        aria-labelledby="parent-modal-title"
+        aria-describedby="parent-modal-description"
       >
         <Box sx={{ ...style, width: 400 }}>
           <Box>
