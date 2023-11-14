@@ -1,33 +1,32 @@
 import axios from "axios";
 import useSWRMutation, {SWRMutationResponse} from "swr/mutation";
 import {Arguments} from "swr";
-import {ApiErrorResponse, Calender, CalenderId} from "./objects";
+import {ApiErrorResponse, CalenderId, Empty} from "./objects";
 
 
-export const useCreateCalender = createHook<CalenderId, Calender>("/api/calender", createPost());
-
-function createPost<RESULT>(): (url: string | URL, {arg}: { arg: Arguments }) => Promise<RESULT> {
-
-    return async (url: string, {arg}: { arg: Arguments }) => {
-        const res = await axios.post<RESULT>(url, arg)
-        return res.data
-    }
+function useCreateCalender() {
+    return useApi<CalenderId>("/api/calender", post)
 }
 
-function createPut<RESULT>(): (url: string | URL, {arg}: { arg: Arguments }) => Promise<RESULT> {
-
-    return async (url: string, {arg}: { arg: Arguments }) => {
-        const res = await axios.put<RESULT>(url, arg)
-        return res.data
-    }
+function useEditCalender(calender_id: number) {
+    return useApi<Empty>(`/api/calender/${calender_id}`, put)
 }
 
-function createHook<RESULT, BODY = never>(
+async function post<RESULT>(url: string, {arg}: { arg: Arguments }): Promise<RESULT> {
+    const res = await axios.post<RESULT>(url, arg)
+    return res.data
+
+}
+
+async function put<RESULT>(url: string, {arg}: { arg: Arguments }): Promise<RESULT> {
+    const res = await axios.put<RESULT>(url, arg)
+    return res.data
+}
+
+
+function useApi<RESULT, BODY = never>(
     path: string,
     fetcher: (url: string, {arg}: { arg: Arguments }) => Promise<RESULT>
-): () => SWRMutationResponse<RESULT, ApiErrorResponse, string, BODY> {
-
-    return () => {
-        return useSWRMutation(path, fetcher)
-    }
+): SWRMutationResponse<RESULT, ApiErrorResponse, string, BODY> {
+    return useSWRMutation(path, fetcher)
 }

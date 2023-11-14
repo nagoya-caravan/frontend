@@ -12,3 +12,6 @@ export interface ApiErrorResponse {
     error_id: string,
     message: string
 }
+
+export interface Empty {
+}
