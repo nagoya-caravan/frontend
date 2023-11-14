@@ -1,5 +1,5 @@
 import moment from "moment";
-import { Button, Box, Typography } from "@mui/material";
+import { Button, Box, Typography, TextField } from "@mui/material";
 import styled from "styled-components";
 import useYearMonth from "../../hooks/useYearMonth";
 // 月初めの日付と曜日を計算する関数
@@ -26,23 +26,29 @@ const getMonthData = (year, month) => {
   }
 
   //月初めの週の日付が七日間に満たない場合、先月の日付を配列に格納する
+
   if (firstDayOfWeek !== 0) {
     const daysToAdd = firstDayOfWeek;
     for (let day = 1; day <= daysToAdd; day++) {
-      weeks[0].unshift({ date: daysInMonth, dayOfWeek: currentWeek });
+      weeks[0].unshift({ date: daysInMonth, dayOfWeek: daysToAdd - day });
       daysInMonth--;
     }
-    // 月末の週の日付が七日間に満たない場合、翌月の日付を配列に格納する
-    if (weeks[weeks.length - 1].length !== 7) {
-      const daysToAdd = 7 - weeks[weeks.length - 1].length;
-      for (let day = 1; day <= daysToAdd; day++) {
-        weeks[weeks.length - 1].push({ date: day, dayOfWeek: currentWeek });
-      }
-    }
-
-    return weeks;
   }
+  // 月末の週の日付が七日間に満たない場合、翌月の日付を配列に格納する// 月末の週の日付が七日間に満たない場合、翌月の日付を配列に格納する
+  if (weeks[weeks.length - 1].length !== 7) {
+    let lastDayOfWeek =
+      weeks[weeks.length - 1][weeks[weeks.length - 1].length - 1].dayOfWeek;
+    const daysToAdd = 7 - weeks[weeks.length - 1].length;
+    for (let day = 1; day <= daysToAdd; day++) {
+      lastDayOfWeek = (lastDayOfWeek + 1) % 7;
+      weeks[weeks.length - 1].push({ date: day, dayOfWeek: lastDayOfWeek });
+    }
+  }
+  console.log(weeks);
+
+  return weeks;
 };
+
 const WeekRow = ({ week, lastWeek }) => {
   return (
     <Box display={{ xs: "none", md: "flex" }}>
@@ -93,6 +99,7 @@ const WeekCalendar = ({ year, month }) => {
 const Calendar = () => {
   const {
     currentYearMonth,
+    setCurrentYearMonth,
     handleNextMonth,
     handlePrevMonth,
     handleNextYear,
@@ -102,6 +109,26 @@ const Calendar = () => {
   return (
     <>
       <Box>
+        <TextField
+          sx={{ ml: "160px" }}
+          placeholder={currentYearMonth.format("YYYY/MM")}
+          typeof='text'
+          //enterキーで年月を変更する
+          onKeyPress={(e) => {
+            //実際の日付をバリデーションする
+
+            if (
+              e.key === "Enter" &&
+              e.target.value.test(/^[0-9]{4}\/^[1-2]$/)
+            ) {
+              const inputYearMonth = e.target.value;
+              const year = inputYearMonth.slice(0, 4);
+              const month = inputYearMonth.slice(5, 7);
+              setCurrentYearMonth(moment([year, month - 1]));
+            }
+          }}
+        />
+
         <Typography variant='h4'>
           {currentYearMonth.format("YYYY年MM月")}
         </Typography>
@@ -139,6 +166,7 @@ const Calendar = () => {
         <DayOfTheWeek>金</DayOfTheWeek>
         <DayOfTheWeek>土</DayOfTheWeek>
       </Box>
+
       <WeekCalendar
         year={currentYearMonth.year()}
         month={currentYearMonth.month()}
