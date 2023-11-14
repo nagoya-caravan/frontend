@@ -19,6 +19,7 @@ const useYearMonth = () => {
 
   return {
     currentYearMonth,
+    setCurrentYearMonth,
     handleNextMonth,
     handlePrevMonth,
     handleNextYear,
