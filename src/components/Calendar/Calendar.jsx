@@ -115,16 +115,15 @@ const Calendar = () => {
           typeof='text'
           //enterキーで年月を変更する
           onKeyPress={(e) => {
-            //実際の日付をバリデーションする
-
-            if (
-              e.key === "Enter" &&
-              e.target.value.test(/^[0-9]{4}\/^[1-2]$/)
-            ) {
+            if (e.key === "Enter") {
               const inputYearMonth = e.target.value;
               const year = inputYearMonth.slice(0, 4);
               const month = inputYearMonth.slice(5, 7);
-              setCurrentYearMonth(moment([year, month - 1]));
+              if (year && month) {
+                setCurrentYearMonth(moment([year, month - 1]));
+              } else {
+                alert("正しい年月を入力してください");
+              }
             }
           }}
         />

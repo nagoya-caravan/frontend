@@ -113,14 +113,14 @@ export default function MiniDrawer() {
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
         {/* AppBar */}
-        <AppBar position='fixed' open={open}>
+        <AppBar position="fixed" open={open}>
           <Toolbar>
             {/* ハンバーガーメニュー */}
             <IconButton
-              color='inherit'
-              aria-label='open drawer'
+              color="inherit"
+              aria-label="open drawer"
               onClick={handleDrawerOpen}
-              edge='start'
+              edge="start"
               sx={{
                 marginRight: 5,
                 ...(open && { display: "none" }),
@@ -128,14 +128,14 @@ export default function MiniDrawer() {
             >
               <WidgetsIcon />
             </IconButton>
-            <Typography variant='h6' noWrap component='div'>
-              SideBar Testing
+            <Typography variant="h6" noWrap component="div">
+              カレンダー
             </Typography>
           </Toolbar>
         </AppBar>
 
         {/* Drawer */}
-        <CustomDrawer variant='permanent' open={open}>
+        <CustomDrawer variant="permanent" open={open}>
           <DrawerHeader>
             <IconButton onClick={handleDrawerClose}>
               {theme.direction === "rtl" ? (
@@ -220,7 +220,7 @@ export default function MiniDrawer() {
           </List>
         </CustomDrawer>
         {/* Main Content */}
-        <Box component='main' sx={{ flexGrow: 1, p: 3 }}>
+        <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
           <DrawerHeader />
         </Box>
       </Box>
