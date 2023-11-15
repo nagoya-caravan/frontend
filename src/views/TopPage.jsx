@@ -1,7 +1,6 @@
 import { Box, Button, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import URLPopup from "../components/URLPopup";
-import LoginButton from "../components/auth/LoginButton";
 
 const TopPage = () => {
   return (
@@ -17,9 +16,7 @@ const TopPage = () => {
           p: 2,
         }}
       >
-        <LoginButton />
         <Typography variant='h4'>LeafSchedule</Typography>
-        <LoginButton />
 
         <Box
           sx={{
