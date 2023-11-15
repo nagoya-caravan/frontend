@@ -1,7 +1,5 @@
-import { Box, Button, Typography } from "@mui/material";
-import { Link } from "react-router-dom";
-import URLPopup from "../components/URLPopup";
-
+import { Box, Typography } from "@mui/material";
+import LoginButton from "../components/auth/LoginButton";
 const TopPage = () => {
   return (
     <>
@@ -28,12 +26,7 @@ const TopPage = () => {
             p: 2,
           }}
         >
-          <URLPopup />
-          <Box>
-            <Link to='/list'>
-              <Button variant='outlined'>カレンダー編集</Button>
-            </Link>
-          </Box>
+          <LoginButton />
         </Box>
       </Box>
     </>
