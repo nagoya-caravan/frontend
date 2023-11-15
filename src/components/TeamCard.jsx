@@ -28,13 +28,17 @@ export const TeamCard = () => {
             {/* カードのペーパーコンポーネント */}
             <Paper
               elevation={5}
-              style={{ borderRadius: "8px", backgroundColor: "white", position:"flex" }}
+              style={{ borderRadius: "8px", backgroundColor: "white" }}
             >
               <Typography sx={{fontSize:"40px", margin:"0 0 -60px 10px", position:"relative", zIndex:2, color:"white"}}>
-                {item}
-              
+                {item}              
               </Typography>
-              <CloseIcon sx={{  position:"absolute",  color:"white", textAlign:"right"}}/>
+              <Box sx={{textAlign:"right", margin:"0 30px -20px 0"}}>
+                <CloseIcon sx={{ display:"inline-block", position:"absolute",  color:"white"}}/>
+              </Box>
+              
+                
+              
               
               {/* カードメディア */}
               <CardMedia
