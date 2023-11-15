@@ -26,7 +26,14 @@ const Calendar = () => {
 
   return (
     <>
-      <Box sx={{}}>
+      <Box>
+        <IconButton variant='outlined' onClick={handlePrevYear}>
+          <KeyboardDoubleArrowLeftIcon />
+        </IconButton>
+        <IconButton variant='outlined' onClick={handlePrevMonth}>
+          <KeyboardArrowLeftIcon />
+        </IconButton>
+
         {clickedDate === false ? (
           <IconButton
             onClick={() => {
@@ -61,12 +68,7 @@ const Calendar = () => {
             }}
           />
         )}
-        <IconButton variant='outlined' onClick={handlePrevYear}>
-          <KeyboardDoubleArrowLeftIcon />
-        </IconButton>
-        <IconButton variant='outlined' onClick={handlePrevMonth}>
-          <KeyboardArrowLeftIcon />
-        </IconButton>
+
         <IconButton variant='outlined' onClick={handleNextMonth}>
           <KeyboardArrowRightIcon />
         </IconButton>
