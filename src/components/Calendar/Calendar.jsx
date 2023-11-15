@@ -3,6 +3,10 @@ import { Button, Box, Typography, TextField, IconButton } from "@mui/material";
 import styled from "styled-components";
 import useYearMonth from "../../hooks/useYearMonth";
 import { useState } from "react";
+import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
+import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
+import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
+import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 // 月初めの日付と曜日を計算する関数
 const getMonthData = (year, month) => {
   const firstDayOfMonth = moment([year, month]);
@@ -129,6 +133,7 @@ const Calendar = () => {
             }}
             placeholder={currentYearMonth.format("YYYY/MM")}
             typeof='text'
+            variant='standard'
             //enterキーで年月を変更する
             onKeyPress={(e) => {
               if (e.key === "Enter") {
@@ -145,19 +150,19 @@ const Calendar = () => {
             }}
           />
         )}
-        <Button variant='outlined' onClick={handlePrevYear}>
-          Previous Year
-        </Button>
-        <Button variant='outlined' onClick={handlePrevMonth}>
-          Previous Month
-        </Button>
+        <IconButton variant='outlined' onClick={handlePrevYear}>
+          <KeyboardDoubleArrowLeftIcon />
+        </IconButton>
+        <IconButton variant='outlined' onClick={handlePrevMonth}>
+          <KeyboardArrowLeftIcon />
+        </IconButton>
 
-        <Button variant='outlined' onClick={handleNextMonth}>
-          Next Month
-        </Button>
-        <Button variant='outlined' onClick={handleNextYear}>
-          Next Year
-        </Button>
+        <IconButton variant='outlined' onClick={handleNextMonth}>
+          <KeyboardArrowRightIcon />
+        </IconButton>
+        <IconButton variant='outlined' onClick={handleNextYear}>
+          <KeyboardDoubleArrowRightIcon />
+        </IconButton>
       </Box>
       <Box
         sx={{
