@@ -1,5 +1,5 @@
 export interface Calender {
-    calender_id: number
+    calender_id?: number
     calender_name: string
     ical_url: string
 }

@@ -1,32 +1,10 @@
-import axios from "axios";
-import useSWRMutation, {SWRMutationResponse} from "swr/mutation";
-import {Arguments} from "swr";
-import {ApiErrorResponse, CalenderId, Empty} from "./objects";
+import {Calender} from "./objects";
+import {fetchJson} from "./fetch";
 
-
-function useCreateCalender() {
-    return useApi<CalenderId>("/api/calender", post)
+export function createCalender(calender: Calender) {
+    return fetchJson("/api/calender", null, calender, "POST")
 }
 
-function useEditCalender(calender_id: number) {
-    return useApi<Empty>(`/api/calender/${calender_id}`, put)
-}
-
-async function post<RESULT>(url: string, {arg}: { arg: Arguments }): Promise<RESULT> {
-    const res = await axios.post<RESULT>(url, arg)
-    return res.data
-
-}
-
-async function put<RESULT>(url: string, {arg}: { arg: Arguments }): Promise<RESULT> {
-    const res = await axios.put<RESULT>(url, arg)
-    return res.data
-}
-
-
-function useApi<RESULT, BODY = never>(
-    path: string,
-    fetcher: (url: string, {arg}: { arg: Arguments }) => Promise<RESULT>
-): SWRMutationResponse<RESULT, ApiErrorResponse, string, BODY> {
-    return useSWRMutation(path, fetcher)
+export function editCalender(calender_id: number, calender: Calender) {
+    return fetchJson(`/api/calender/${calender_id}`, null, calender, "PUT")
 }
