@@ -28,19 +28,19 @@ const Calendar = () => {
     <>
       <Box>
         <IconButton variant='outlined' onClick={handlePrevYear}>
-          <KeyboardDoubleArrowLeftIcon />
+          <KeyboardDoubleArrowLeftIcon fontSize="large"/>
         </IconButton>
         <IconButton variant='outlined' onClick={handlePrevMonth}>
-          <KeyboardArrowLeftIcon />
+          <KeyboardArrowLeftIcon fontSize="large"/>
         </IconButton>
-
+        
         {clickedDate === false ? (
           <IconButton
             onClick={() => {
               setClickedDate(true);
             }}
           >
-            <Typography variant='h4'>
+            <Typography variant='h5'>
               {currentYearMonth.format("YYYY年MM月")}
             </Typography>
           </IconButton>
@@ -66,14 +66,16 @@ const Calendar = () => {
                 }
               }
             }}
+            size="large"
+            sx={{margin:"8.49px 10px 8.49px 10px"}}
           />
         )}
 
         <IconButton variant='outlined' onClick={handleNextMonth}>
-          <KeyboardArrowRightIcon />
+          <KeyboardArrowRightIcon fontSize="large"/>
         </IconButton>
         <IconButton variant='outlined' onClick={handleNextYear}>
-          <KeyboardDoubleArrowRightIcon />
+          <KeyboardDoubleArrowRightIcon fontSize="large"/>
         </IconButton>
       </Box>
       <Box
