@@ -1,9 +1,13 @@
-import { CardContent, CardMedia, Grid, Typography, Paper } from "@mui/material";
+import { CardContent, CardMedia, Grid, Typography, Paper, Box } from "@mui/material";
 import React from "react";
+import picture from "../assets/img/picture1.jpg";
+import CloseIcon from '@mui/icons-material/Close';
+import CheckBoxIcon from '@mui/icons-material/CheckBox';
 
 export const TeamCard = () => {
   return (
     <>
+    <Box>
       {/* タイトル */}
       <Typography variant="h3" sx={{ ml: 2 }}>
         Team
@@ -18,18 +22,25 @@ export const TeamCard = () => {
         }}
       >
         {/* マップ関数でカードを生成 */}
-        {[1, 2, 3, 4].map((item, index) => (
+        {[1, 2, 3, "Test"].map((item, index) => (
           <Grid item xs={3} key={index}>
+            
             {/* カードのペーパーコンポーネント */}
             <Paper
               elevation={5}
-              style={{ borderRadius: "8px", backgroundColor: "white" }}
+              style={{ borderRadius: "8px", backgroundColor: "white", position:"flex" }}
             >
+              <Typography sx={{fontSize:"40px", margin:"0 0 -60px 10px", position:"relative", zIndex:2, color:"white"}}>
+                {item}
+              
+              </Typography>
+              <CloseIcon sx={{  position:"absolute",  color:"white", textAlign:"right"}}/>
+              
               {/* カードメディア */}
               <CardMedia
                 component="img"
                 height="150"
-                src="./00.png"
+                src={picture}
                 alt={`Card Image ${item}`}
                 style={{
                   borderTopLeftRadius: "8px",
@@ -38,19 +49,28 @@ export const TeamCard = () => {
               />
               {/* カードコンテンツ */}
               <CardContent>
+                {/* 日付 */}
+                <Typography>
+                  日付： {"2023/11/15"}
+                </Typography>
                 {/* カードタイトル */}
-                <Typography variant="h6" gutterBottom>
-                  Card Title {item}
+                <Typography variant="h6" >
+                  予定内容： {item}
                 </Typography>
                 {/* カード詳細 */}
-                <Typography variant="body2" color="textSecondary">
-                  detail:{item}
+                <Typography variant="h7" color="textSecondary">
+                  公開：<input type="checkbox" style={{lineHeight:0}}/>
                 </Typography>
+                <Box sx={{textAlign:"right"}}>
+                  <button type="submit" style={{ display:"inline-block", position:"relative" }}>設定</button>
+
+                </Box>
               </CardContent>
             </Paper>
           </Grid>
         ))}
       </Grid>
+    </Box>  
     </>
   );
 };
