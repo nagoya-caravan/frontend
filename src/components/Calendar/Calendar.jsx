@@ -28,19 +28,19 @@ const Calendar = () => {
     <>
       <Box>
         <IconButton variant='outlined' onClick={handlePrevYear}>
-          <KeyboardDoubleArrowLeftIcon />
+          <KeyboardDoubleArrowLeftIcon fontSize="large"/>
         </IconButton>
         <IconButton variant='outlined' onClick={handlePrevMonth}>
-          <KeyboardArrowLeftIcon />
+          <KeyboardArrowLeftIcon fontSize="large"/>
         </IconButton>
-
+        
         {clickedDate === false ? (
           <IconButton
             onClick={() => {
               setClickedDate(true);
             }}
           >
-            <Typography variant='h4'>
+            <Typography variant='h5'>
               {currentYearMonth.format("YYYY年MM月")}
             </Typography>
           </IconButton>
@@ -66,14 +66,16 @@ const Calendar = () => {
                 }
               }
             }}
+            size="large"
+            sx={{margin:"8.49px 10px 8.49px 10px"}}
           />
         )}
 
         <IconButton variant='outlined' onClick={handleNextMonth}>
-          <KeyboardArrowRightIcon />
+          <KeyboardArrowRightIcon fontSize="large"/>
         </IconButton>
         <IconButton variant='outlined' onClick={handleNextYear}>
-          <KeyboardDoubleArrowRightIcon />
+          <KeyboardDoubleArrowRightIcon fontSize="large"/>
         </IconButton>
       </Box>
       <Box
@@ -83,9 +85,9 @@ const Calendar = () => {
           gridAutoFlow: "row",
           gridTemplateColumns: "repeat(7, 1fr)",
           gap: 0,
-          borderBottom: "solid 1px #111",
-          borderLeft: "solid 1px #111",
-          borderRight: "solid 1px #111",
+          // borderBottom: "solid 1px #111",
+          // borderLeft: "solid 1px #111",
+          // borderRight: "solid 1px #111",
         }}
       >
         <DayOfTheWeek>日</DayOfTheWeek>
@@ -109,6 +111,5 @@ export default Calendar;
 
 const DayOfTheWeek = styled(Box)`
   text-align: center;
-  border-top: solid 1px #111;
-  border-bottom: 1px solid #111;
+  margin: 30px 0 10px 0;
 `;
