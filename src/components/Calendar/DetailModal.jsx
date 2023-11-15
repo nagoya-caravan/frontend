@@ -5,10 +5,15 @@ import {
   Modal,
   Typography,
   Grid,
-  Paper,
   CardContent,
+  Chip,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import EventIcon from "@mui/icons-material/Event";
+import LockOpenIcon from "@mui/icons-material/LockOpen";
+
+// タイトル、日付、要件、一般公開（チェックボックスをつける）、submitボタンをつける
 
 const style = {
   position: "absolute",
@@ -34,8 +39,17 @@ export default function DetailModal() {
   };
 
   return (
-    <div>
-      <Button onClick={handleOpen}>ここをクリック</Button>
+    <>
+      <Chip
+        onClick={handleOpen}
+        sx={{
+          width: "90%",
+          mt: 1,
+          mx: "auto",
+        }}
+      >
+        予定
+      </Chip>
       <Modal
         open={open}
         onClose={handleClose}
@@ -56,17 +70,59 @@ export default function DetailModal() {
               />
             </Box>
 
-            {/* カードコンテンツ */}
             <CardContent>
-              {/* 日付 */}
-              <Typography>日付： {"2023/11/15"}</Typography>
-              {/* カードタイトル */}
-              <Typography variant='h6'>予定内容： </Typography>
-              {/* カード詳細 */}
-              <Typography variant='h7' color='textSecondary'>
-                公開：
-                <input type='checkbox' style={{ lineHeight: 0 }} />
+              <Typography
+                variant='h4'
+                gutterBottom
+                sx={{ margin: "10px 0 30px 0" }}
+              >
+                予定タイトル
               </Typography>
+              {/* 日付 */}
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  marginTop: "20px",
+                }}
+              >
+                <CalendarMonthIcon
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    marginRight: "10px",
+                  }}
+                />
+                <Typography>日付：{"2023/11/15"}</Typography>
+              </Box>
+
+              {/* カードタイトル */}
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  marginTop: "20px",
+                }}
+              >
+                <EventIcon sx={{ marginRight: "10px" }} />
+                <Typography variant='h6'>予定内容： </Typography>
+              </Box>
+
+              {/* カード詳細 */}
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  marginTop: "20px",
+                }}
+              >
+                <LockOpenIcon sx={{ marginRight: "10px" }} />
+                <Typography variant='h7' color='textSecondary'>
+                  公開：
+                  <input type='checkbox' style={{ lineHeight: 0 }} />
+                </Typography>
+              </Box>
+
               <Box sx={{ textAlign: "right" }}>
                 <Button
                   variant='outlined'
@@ -79,6 +135,6 @@ export default function DetailModal() {
           </Grid>
         </Box>
       </Modal>
-    </div>
+    </>
   );
 }
