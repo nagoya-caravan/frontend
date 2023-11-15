@@ -83,9 +83,9 @@ const Calendar = () => {
           gridAutoFlow: "row",
           gridTemplateColumns: "repeat(7, 1fr)",
           gap: 0,
-          borderBottom: "solid 1px #111",
-          borderLeft: "solid 1px #111",
-          borderRight: "solid 1px #111",
+          // borderBottom: "solid 1px #111",
+          // borderLeft: "solid 1px #111",
+          // borderRight: "solid 1px #111",
         }}
       >
         <DayOfTheWeek>日</DayOfTheWeek>
@@ -109,6 +109,5 @@ export default Calendar;
 
 const DayOfTheWeek = styled(Box)`
   text-align: center;
-  border-top: solid 1px #111;
-  border-bottom: 1px solid #111;
+  margin: 30px 0 10px 0;
 `;
