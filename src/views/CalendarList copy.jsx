@@ -1,4 +1,7 @@
+import { Details } from "@mui/icons-material";
 import { Box, Grid, Typography, Paper } from "@mui/material";
+
+
 const CalendarList = () => {
   //apiあらデータ取得した時のことを想定して打mーデータをmapで回す
   const data = [
@@ -38,6 +41,7 @@ const CalendarList = () => {
   ];
 
   return (
+    <DetailModal />
     <Box>
       <Typography>CalendarList</Typography>
       <Grid container xs={12} sx={{ width: "100%", textAlign: "center" }}>

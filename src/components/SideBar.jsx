@@ -135,7 +135,11 @@ export default function MiniDrawer() {
         </AppBar>
 
         {/* Drawer */}
-        <CustomDrawer variant="permanent" open={open}>
+        <CustomDrawer
+          variant="permanent"
+          open={open}
+          sx={{ position: "fixed" }}
+        >
           <DrawerHeader>
             <IconButton onClick={handleDrawerClose}>
               {theme.direction === "rtl" ? (
@@ -220,7 +224,7 @@ export default function MiniDrawer() {
           </List>
         </CustomDrawer>
         {/* Main Content */}
-        <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+        <Box component="main" sx={{ flexGrow: 1, p: 3, margin: "0 60px 0 0" }}>
           <DrawerHeader />
         </Box>
       </Box>
