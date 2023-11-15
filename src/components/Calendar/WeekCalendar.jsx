@@ -54,7 +54,7 @@ const WeekCalendar = (props) => {
   return (
     <Box>
       {weeksOfMonth.map((week, index) => (
-        <WeekRow key={index} week={week} />
+        <WeekRow key={index} week={week} year={year} month={month} />
       ))}
     </Box>
   );

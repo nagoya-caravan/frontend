@@ -1,6 +1,7 @@
 import { Box } from "@mui/material";
 const WeekRow = (props) => {
-  const { week } = props;
+  const { year, month, week } = props;
+  //  {year} {month + 1}
   return (
     <Box display={{ xs: "none", md: "flex" }}>
       {week.map((day) => (
