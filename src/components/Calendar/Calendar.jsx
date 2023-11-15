@@ -2,7 +2,6 @@ import moment from "moment";
 import { Button, Box, Typography, TextField } from "@mui/material";
 import styled from "styled-components";
 import useYearMonth from "../../hooks/useYearMonth";
-
 // 月初めの日付と曜日を計算する関数
 const getMonthData = (year, month) => {
   const firstDayOfMonth = moment([year, month]);
