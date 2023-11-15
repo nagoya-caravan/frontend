@@ -1,7 +1,8 @@
 import moment from "moment";
-import { Button, Box, Typography, TextField } from "@mui/material";
+import { Button, Box, Typography, TextField, IconButton } from "@mui/material";
 import styled from "styled-components";
 import useYearMonth from "../../hooks/useYearMonth";
+import { useState } from "react";
 // 月初めの日付と曜日を計算する関数
 const getMonthData = (year, month) => {
   const firstDayOfMonth = moment([year, month]);
@@ -106,31 +107,44 @@ const Calendar = () => {
     handlePrevYear,
   } = useYearMonth();
 
+  const [clickedDate, setClickedDate] = useState(false);
+
   return (
     <>
-      <Box>
-        <TextField
-          sx={{ ml: "160px" }}
-          placeholder={currentYearMonth.format("YYYY/MM")}
-          typeof='text'
-          //enterキーで年月を変更する
-          onKeyPress={(e) => {
-            if (e.key === "Enter") {
-              const inputYearMonth = e.target.value;
-              const year = inputYearMonth.slice(0, 4);
-              const month = inputYearMonth.slice(5, 7);
-              if (year && month) {
-                setCurrentYearMonth(moment([year, month - 1]));
-              } else {
-                alert("正しい年月を入力してください");
+      <Box sx={{}}>
+        {clickedDate === false ? (
+          <IconButton
+            onClick={() => {
+              setClickedDate(true);
+            }}
+          >
+            <Typography variant='h4'>
+              {currentYearMonth.format("YYYY年MM月")}
+            </Typography>
+          </IconButton>
+        ) : (
+          <TextField
+            onBlur={() => {
+              setClickedDate(false);
+            }}
+            placeholder={currentYearMonth.format("YYYY/MM")}
+            typeof='text'
+            //enterキーで年月を変更する
+            onKeyPress={(e) => {
+              if (e.key === "Enter") {
+                const inputYearMonth = e.target.value;
+                const year = inputYearMonth.slice(0, 4);
+                const month = inputYearMonth.slice(5, 7);
+                if (year && month) {
+                  setCurrentYearMonth(moment([year, month - 1]));
+                  setClickedDate(false);
+                } else {
+                  alert("正しい年月を入力してください");
+                }
               }
-            }
-          }}
-        />
-
-        <Typography variant='h4'>
-          {currentYearMonth.format("YYYY年MM月")}
-        </Typography>
+            }}
+          />
+        )}
         <Button variant='outlined' onClick={handlePrevYear}>
           Previous Year
         </Button>
