@@ -32,7 +32,6 @@ const TopPage = () => {
             <Link to='/list'>
               <Button variant='outlined'>カレンダー編集</Button>
             </Link>
-            <DetailModal />
           </Box>
         </Box>
       </Box>
