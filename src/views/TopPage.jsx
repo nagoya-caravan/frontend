@@ -1,6 +1,7 @@
 import { Box, Button, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import URLPopup from "../components/URLPopup";
+import DetailModal from "../components/Calendar/DetailModal";
 const TopPage = () => {
   return (
     <>
@@ -31,6 +32,7 @@ const TopPage = () => {
             <Link to='/list'>
               <Button variant='outlined'>カレンダー編集</Button>
             </Link>
+            <DetailModal />
           </Box>
         </Box>
       </Box>

@@ -6,10 +6,8 @@ import {
   Typography,
   Grid,
   Paper,
-  CardMedia,
   CardContent,
 } from "@mui/material";
-import HighlightOffSharpIcon from "@mui/icons-material/HighlightOffSharp";
 import CloseIcon from "@mui/icons-material/Close";
 
 const style = {
@@ -41,69 +39,43 @@ export default function DetailModal() {
       <Modal
         open={open}
         onClose={handleClose}
-        aria-labelledby="parent-modal-title"
-        aria-describedby="parent-modal-description"
+        aria-labelledby='parent-modal-title'
+        aria-describedby='parent-modal-description'
       >
         <Box sx={{ ...style, width: 400 }}>
-          <Grid item xs={3} key={index}>
+          <Grid item xs={3}>
             {/* カードのペーパーコンポーネント */}
-            <Paper
-              elevation={5}
-              style={{ borderRadius: "8px", backgroundColor: "white" }}
-            >
-              <Typography
+
+            <Box sx={{ textAlign: "right", margin: "0 30px -20px 0" }}>
+              <CloseIcon
                 sx={{
-                  fontSize: "40px",
-                  margin: "0 0 -60px 10px",
-                  position: "relative",
-                  zIndex: 2,
+                  display: "inline-block",
+                  position: "absolute",
                   color: "white",
                 }}
-              >
-                {item}
-              </Typography>
-              <Box sx={{ textAlign: "right", margin: "0 30px -20px 0" }}>
-                <CloseIcon
-                  sx={{
-                    display: "inline-block",
-                    position: "absolute",
-                    color: "white",
-                  }}
-                />
-              </Box>
-
-              {/* カードメディア */}
-              <CardMedia
-                component="img"
-                height="150"
-                src={picture}
-                alt={`Card Image ${item}`}
-                style={{
-                  borderTopLeftRadius: "8px",
-                  borderTopRightRadius: "8px",
-                }}
               />
-              {/* カードコンテンツ */}
-              <CardContent>
-                {/* 日付 */}
-                <Typography>日付： {"2023/11/15"}</Typography>
-                {/* カードタイトル */}
-                <Typography variant="h6">予定内容： {item}</Typography>
-                {/* カード詳細 */}
-                <Typography variant="h7" color="textSecondary">
-                  公開：
-                  <input type="checkbox" style={{ lineHeight: 0 }} />
-                </Typography>
-                <Box sx={{ textAlign: "right" }}>
-                  <Button
-                    variant="outlined"
-                    sx={{ display: "inline-block", position: "relative" }}
-                  >
-                    設定
-                  </Button>
-                </Box>
-              </CardContent>
-            </Paper>
+            </Box>
+
+            {/* カードコンテンツ */}
+            <CardContent>
+              {/* 日付 */}
+              <Typography>日付： {"2023/11/15"}</Typography>
+              {/* カードタイトル */}
+              <Typography variant='h6'>予定内容： </Typography>
+              {/* カード詳細 */}
+              <Typography variant='h7' color='textSecondary'>
+                公開：
+                <input type='checkbox' style={{ lineHeight: 0 }} />
+              </Typography>
+              <Box sx={{ textAlign: "right" }}>
+                <Button
+                  variant='outlined'
+                  sx={{ display: "inline-block", position: "relative" }}
+                >
+                  設定
+                </Button>
+              </Box>
+            </CardContent>
           </Grid>
         </Box>
       </Modal>
