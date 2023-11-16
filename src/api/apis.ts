@@ -1,5 +1,6 @@
 import { Calender } from "./objects";
 import { fetchJson } from "./fetch";
+import { User } from "./objects";
 
 export function createCalender(calender: Calender) {
   return fetchJson("/api/calender", undefined, calender, "POST");
@@ -12,21 +13,27 @@ export function getCalendar(user_id: string) {
   return fetchJson(`/api/user/${user_id}`, undefined, "GET");
 }
 
-export async function getUser(uid) {
+export async function getUser(firebaseUser) {
   try {
-    const user = await fetchJson(`/api/user/${uid}`, undefined, "GET");
+    const user = await fetchJson(
+      `/api/user/${firebaseUser.uid}`,
+      undefined,
+      "GET"
+    );
     if (!user) {
-      postUser(uid);
+      postUser({
+        username: firebaseUser.displayName,
+        password: firebaseUser.uid,
+      });
     }
   } catch (error) {
     console.error("Error fetching user:", error);
   }
 }
 
-async function postUser(uid) {
+async function postUser(user: User) {
   try {
-    const body = { uid: uid, name: name };
-    return await fetchJson("/api/user", undefined, body, "POST");
+    return await fetchJson("auth/register", undefined, user, "POST");
   } catch (error) {
     console.error("Error posting user:", error);
   }

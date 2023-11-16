@@ -19,10 +19,10 @@ const LoginButton = () => {
       // Googleでのログイン処理
       await signInWithPopup(auth, provider);
       const firebaseUser = auth.currentUser;
-      if (!firebaseUser) throw new Error("No current user");
 
+      if (!firebaseUser) throw new Error("No current user");
       // ユーザー情報の取得
-      await getUser(firebaseUser.uid);
+      await getUser(firebaseUser);
       console.log("Google login successful");
     } catch (error) {
       console.error("Google login failed:", error);
