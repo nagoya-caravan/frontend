@@ -1,4 +1,6 @@
 import { Box, Typography } from "@mui/material";
+
+
 const TopPage = () => {
   return (
     <>
@@ -24,6 +26,7 @@ const TopPage = () => {
             alignItems: "center",
             p: 2,
           }}
+
         ></Box>
       </Box>
     </>
