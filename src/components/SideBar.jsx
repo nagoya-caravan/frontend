@@ -20,11 +20,9 @@ import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import EventAvailableIcon from "@mui/icons-material/EventAvailable";
 import EditCalendarIcon from "@mui/icons-material/EditCalendar";
 import WidgetsIcon from "@mui/icons-material/Widgets";
-import FoodBankIcon from "@mui/icons-material/FoodBank";
-import GamesIcon from "@mui/icons-material/Games";
-import GroupsIcon from "@mui/icons-material/Groups";
-import MeetingRoomIcon from "@mui/icons-material/MeetingRoom";
+import AddIcon from "@mui/icons-material/Add";
 import { Outlet } from "react-router-dom";
+import { Avatar } from "@mui/material";
 
 const drawerWidth = 240;
 
@@ -100,6 +98,8 @@ export default function MiniDrawer() {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
 
+  // const icon = data.img
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -113,14 +113,14 @@ export default function MiniDrawer() {
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
         {/* AppBar */}
-        <AppBar position="fixed" open={open}>
+        <AppBar position='fixed' open={open}>
           <Toolbar>
             {/* ハンバーガーメニュー */}
             <IconButton
-              color="inherit"
-              aria-label="open drawer"
+              color='inherit'
+              aria-label='open drawer'
               onClick={handleDrawerOpen}
-              edge="start"
+              edge='start'
               sx={{
                 marginRight: 5,
                 ...(open && { display: "none" }),
@@ -128,7 +128,7 @@ export default function MiniDrawer() {
             >
               <WidgetsIcon />
             </IconButton>
-            <Typography variant="h6" noWrap component="div">
+            <Typography variant='h6' noWrap component='div'>
               カレンダー
             </Typography>
           </Toolbar>
@@ -136,7 +136,7 @@ export default function MiniDrawer() {
 
         {/* Drawer */}
         <CustomDrawer
-          variant="permanent"
+          variant='permanent'
           open={open}
           sx={{ position: "fixed" }}
         >
@@ -151,8 +151,8 @@ export default function MiniDrawer() {
           </DrawerHeader>
           <Divider />
           {/* List 1 */}
-          <List>
-            {["This Month", "Today", "Check Events", "Edit"].map(
+          <List sx={{}}>
+            {["カレンダー一覧", "カレンダー編集", "カレンダー追加"].map(
               (text, index) => (
                 <ListItem key={text} disablePadding sx={{ display: "block" }}>
                   <ListItemButton
@@ -165,19 +165,17 @@ export default function MiniDrawer() {
                     <ListItemIcon
                       sx={{
                         minWidth: 0,
-                        mr: open ? 3 : "auto",
+                        mr: open ? 2 : "auto",
                         justifyContent: "center",
                       }}
                     >
                       {index === 0 ? (
                         <CalendarMonthIcon />
                       ) : index === 1 ? (
-                        <CalendarTodayIcon />
+                        <EditCalendarIcon />
                       ) : index === 2 ? (
                         <EventAvailableIcon />
-                      ) : (
-                        <EditCalendarIcon />
-                      )}
+                      ) : null}
                     </ListItemIcon>
                     <ListItemText
                       primary={text}
@@ -191,7 +189,7 @@ export default function MiniDrawer() {
           <Divider />
           {/* List 2 */}
           <List>
-            {["Food", "Games", "Meeting", "Friends"].map((text, index) => (
+            {["カレンダー追加", "ユーザーログイン"].map((text, index) => (
               <ListItem key={text} disablePadding sx={{ display: "block" }}>
                 <ListItemButton
                   sx={{
@@ -199,34 +197,44 @@ export default function MiniDrawer() {
                     justifyContent: open ? "initial" : "center",
                     px: 2.5,
                   }}
+                  onClick={
+                    index === 0
+                      ? () => {
+                          console.log("カレンダー追加");
+                        }
+                      : index === 1
+                      ? () => {
+                          console.log("ユーザーログイン");
+                        }
+                      : null
+                  }
                 >
                   <ListItemIcon
                     sx={{
                       minWidth: 0,
-                      mr: open ? 3 : "auto",
+                      mr: open ? 2 : "auto",
                       justifyContent: "center",
                     }}
                   >
                     {index === 0 ? (
-                      <FoodBankIcon />
+                      <AddIcon />
                     ) : index === 1 ? (
-                      <GamesIcon />
-                    ) : index === 2 ? (
-                      <MeetingRoomIcon />
-                    ) : (
-                      <GroupsIcon />
-                    )}
+                      <Avatar
+                        sx={{ width: 30, height: 30 }}
+                        defaultSrc='https://picsum.photos/200'
+                        width={20}
+                        height={20}
+                      />
+                    ) : null}
                   </ListItemIcon>
                   <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
                 </ListItemButton>
               </ListItem>
             ))}
           </List>
+
+          <Divider />
         </CustomDrawer>
-        {/* Main Content */}
-        <Box component="main" sx={{ flexGrow: 1, p: 3, margin: "0 60px 0 0" }}>
-          <DrawerHeader />
-        </Box>
       </Box>
       <Outlet />
     </>
