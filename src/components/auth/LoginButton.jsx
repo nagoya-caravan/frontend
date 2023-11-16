@@ -4,7 +4,6 @@ import {
   setPersistence,
   browserLocalPersistence,
 } from "firebase/auth";
-import GoogleButton from "react-google-button";
 import { auth } from "../../utils/firebaseConfig";
 import { getUser } from "../../api/apis";
 
@@ -29,9 +28,7 @@ const LoginButton = () => {
     }
   };
 
-  return (
-    <GoogleButton onClick={handleGoogleLogin}>Login with Google</GoogleButton>
-  );
+  return handleGoogleLogin;
 };
 
 export default LoginButton;
