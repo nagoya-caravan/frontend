@@ -1,5 +1,6 @@
 import { Box, Typography } from "@mui/material";
-import LoginButton from "../components/auth/LoginButton";
+
+
 const TopPage = () => {
   return (
     <>
@@ -25,9 +26,8 @@ const TopPage = () => {
             alignItems: "center",
             p: 2,
           }}
-        >
-          <LoginButton />
-        </Box>
+
+        ></Box>
       </Box>
     </>
   );
