@@ -26,21 +26,21 @@ const Calendar = () => {
 
   return (
     <>
-      <Box>
-        <IconButton variant='outlined' onClick={handlePrevYear}>
-          <KeyboardDoubleArrowLeftIcon fontSize="large"/>
+      <Box sx={{ margin: "100px 0 0 0" }}>
+        <IconButton variant="outlined" onClick={handlePrevYear}>
+          <KeyboardDoubleArrowLeftIcon fontSize="large" />
         </IconButton>
-        <IconButton variant='outlined' onClick={handlePrevMonth}>
-          <KeyboardArrowLeftIcon fontSize="large"/>
+        <IconButton variant="outlined" onClick={handlePrevMonth}>
+          <KeyboardArrowLeftIcon fontSize="large" />
         </IconButton>
-        
+
         {clickedDate === false ? (
           <IconButton
             onClick={() => {
               setClickedDate(true);
             }}
           >
-            <Typography variant='h5'>
+            <Typography variant="h5">
               {currentYearMonth.format("YYYY年MM月")}
             </Typography>
           </IconButton>
@@ -50,8 +50,8 @@ const Calendar = () => {
               setClickedDate(false);
             }}
             placeholder={currentYearMonth.format("YYYY/MM")}
-            typeof='text'
-            variant='standard'
+            typeof="text"
+            variant="standard"
             //enterキーで年月を変更する
             onKeyPress={(e) => {
               if (e.key === "Enter") {
@@ -67,15 +67,15 @@ const Calendar = () => {
               }
             }}
             size="large"
-            sx={{margin:"8.49px 10px 8.49px 10px"}}
+            sx={{ margin: "8.49px 10px 8.49px 10px" }}
           />
         )}
 
-        <IconButton variant='outlined' onClick={handleNextMonth}>
-          <KeyboardArrowRightIcon fontSize="large"/>
+        <IconButton variant="outlined" onClick={handleNextMonth}>
+          <KeyboardArrowRightIcon fontSize="large" />
         </IconButton>
-        <IconButton variant='outlined' onClick={handleNextYear}>
-          <KeyboardDoubleArrowRightIcon fontSize="large"/>
+        <IconButton variant="outlined" onClick={handleNextYear}>
+          <KeyboardDoubleArrowRightIcon fontSize="large" />
         </IconButton>
       </Box>
       <Box
