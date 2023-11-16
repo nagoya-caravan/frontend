@@ -46,6 +46,7 @@ export default function DetailModal() {
           width: "90%",
           mt: 1,
           mx: "auto",
+          zIndex: 1,
         }}
       >
         予定
@@ -53,8 +54,8 @@ export default function DetailModal() {
       <Modal
         open={open}
         onClose={handleClose}
-        aria-labelledby='parent-modal-title'
-        aria-describedby='parent-modal-description'
+        aria-labelledby="parent-modal-title"
+        aria-describedby="parent-modal-description"
       >
         <Box sx={{ ...style, width: 400 }}>
           <Grid item xs={3}>
@@ -72,7 +73,7 @@ export default function DetailModal() {
 
             <CardContent>
               <Typography
-                variant='h4'
+                variant="h4"
                 gutterBottom
                 sx={{ margin: "10px 0 30px 0" }}
               >
@@ -105,7 +106,7 @@ export default function DetailModal() {
                 }}
               >
                 <EventIcon sx={{ marginRight: "10px" }} />
-                <Typography variant='h6'>予定内容： </Typography>
+                <Typography variant="h6">予定内容： </Typography>
               </Box>
 
               {/* カード詳細 */}
@@ -117,15 +118,15 @@ export default function DetailModal() {
                 }}
               >
                 <LockOpenIcon sx={{ marginRight: "10px" }} />
-                <Typography variant='h7' color='textSecondary'>
+                <Typography variant="h7" color="textSecondary">
                   公開：
-                  <input type='checkbox' style={{ lineHeight: 0 }} />
+                  <input type="checkbox" style={{ lineHeight: 0 }} />
                 </Typography>
               </Box>
 
               <Box sx={{ textAlign: "right" }}>
                 <Button
-                  variant='outlined'
+                  variant="outlined"
                   sx={{ display: "inline-block", position: "relative" }}
                 >
                   設定
