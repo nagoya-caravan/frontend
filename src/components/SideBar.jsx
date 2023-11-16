@@ -16,13 +16,12 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import EventAvailableIcon from "@mui/icons-material/EventAvailable";
 import EditCalendarIcon from "@mui/icons-material/EditCalendar";
 import WidgetsIcon from "@mui/icons-material/Widgets";
-import AddIcon from "@mui/icons-material/Add";
 import { Outlet } from "react-router-dom";
 import { Avatar } from "@mui/material";
+import URLPopup from "./URLPopup";
 
 const drawerWidth = 240;
 
@@ -217,7 +216,7 @@ export default function MiniDrawer() {
                     }}
                   >
                     {index === 0 ? (
-                      <AddIcon />
+                      <URLPopup />
                     ) : index === 1 ? (
                       <Avatar
                         sx={{ width: 30, height: 30 }}
