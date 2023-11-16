@@ -15,36 +15,50 @@ const CalendarListCard = () => {
   ];
   return (
     <Box>
-      <Grid container spacing={2}>
+      <Grid container spacing={5}>
         {data.map((item) => (
           <Grid
             item
             key={data.calender_name}
             sx={{
-              width: "80%",
+              width: "100%",
+              margin:"30px auto 30px auto",
             }}
           >
             <Paper
               sx={{
-                width: "100%",
+                margin:"0 auto 0 auto",
+                padding:"20px 100px 20px 30px",                
+                width: "65%",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "space-between",
                 flexWrap: "wrap",
               }}
             >
-              <Typography>{item.calender_name}</Typography>
-              <Typography>{item.create_user}</Typography>
-              <Box>
-                <IconButton>
-                  <ShareIcon />
-                </IconButton>
-              </Box>
-              <Box>
-                <IconButton>
-                  <DeleteIcon />
-                </IconButton>
-              </Box>
+
+                <Box>
+                  <Typography sx={{display:'inline', opacity:0.65, fontSize:"1.3rem"}}>カレンダー名：</Typography>
+                  <Typography sx={{display:"inline", fontSize:"1.3rem"}}>{item.calender_name}</Typography>
+                </Box>
+    
+                <Box>
+                <Typography sx={{display:'inline', opacity:0.65, fontSize:"1.3rem"}}>作成者：</Typography>
+                  <Typography sx={{display:"inline", fontSize:"1.3rem"}}>{item.create_user}</Typography>
+                </Box>              
+                
+                <Box>
+                  <IconButton>
+                    <ShareIcon fontSize="large"/>
+                  </IconButton>
+                </Box>
+                <Box sx={{}}>
+                  <IconButton>
+                    <DeleteIcon fontSize="large"/>
+                  </IconButton>
+                </Box>
+
+              
             </Paper>
           </Grid>
         ))}
