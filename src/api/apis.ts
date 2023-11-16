@@ -1,7 +1,5 @@
 import { Calender } from "./objects";
 import { fetchJson } from "./fetch";
-import { auth } from "../utils/firebaseConfig";
-import { GoogleAuthProvider } from "firebase/auth";
 
 export function createCalender(calender: Calender) {
   return fetchJson("/api/calender", undefined, calender, "POST");
@@ -14,13 +12,22 @@ export function getCalendar(user_id: string) {
   return fetchJson(`/api/user/${user_id}`, undefined, "GET");
 }
 
-export function getUser(uid) {
-  const user = fetchJson(`/api/user/${uid}`, undefined, "GET");
-  if (!user) {
-    postUser(uid);
+export async function getUser(uid) {
+  try {
+    const user = await fetchJson(`/api/user/${uid}`, undefined, "GET");
+    if (!user) {
+      postUser(uid);
+    }
+  } catch (error) {
+    console.error("Error fetching user:", error);
   }
 }
-function postUser(uid) {
-  const name = uid?.displayName;
-  return fetchJson("/api/user", undefined, { name, uid }, "POST");
+
+async function postUser(uid) {
+  try {
+    const body = { uid: uid, name: name };
+    return await fetchJson("/api/user", undefined, body, "POST");
+  } catch (error) {
+    console.error("Error posting user:", error);
+  }
 }
