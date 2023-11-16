@@ -1,6 +1,7 @@
 import { useState } from "react";
 
-import { Button, Input, Typography, Modal, Box } from "@mui/material";
+import { IconButton, Input, Typography, Modal, Box } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
 
 const URLPopup = () => {
   const [open, setOpen] = useState(false);
@@ -13,9 +14,9 @@ const URLPopup = () => {
 
   return (
     <>
-      <Button variant='outlined' onClick={handleOpen}>
-        カレンダー作成
-      </Button>
+      <IconButton variant='outlined' onClick={handleOpen}>
+        <AddIcon />
+      </IconButton>
       <Modal open={open} onClose={handleClose}>
         <Box
           sx={{
