@@ -9,9 +9,6 @@ export function createCalender(calender: Calender) {
 export function editCalender(calender_id: number, calender: Calender) {
   return fetchJson(`/api/calender/${calender_id}`, undefined, calender, "PUT");
 }
-export function getCalendar(user_id: string) {
-  return fetchJson(`/api/user/${user_id}`, undefined, "GET");
-}
 
 export async function getUser(firebaseUser) {
   try {
@@ -33,7 +30,7 @@ export async function getUser(firebaseUser) {
 
 async function postUser(user: User) {
   try {
-    return await fetchJson("auth/register", undefined, user, "POST");
+    return await fetchJson("aoi/user", undefined, user, "POST");
   } catch (error) {
     console.error("Error posting user:", error);
   }
