@@ -13,17 +13,14 @@ export function editCalender(calender_id: number, calender: Calender) {
 export function getCalendar(user_id: string) {
   return fetchJson(`/api/user/${user_id}`, undefined, "GET");
 }
-function postUser(firebaseUser) {
-  const name = firebaseUser?.displayName;
-  const id = firebaseUser?.uid;
-  return fetchJson("/api/user", undefined, { name, id }, "POST");
-}
 
-const getUser = async () => {
-  const firebaseUser = auth.currentUser;
-  if (!firebaseUser) return null;
-  const id = firebaseUser.uid;
-  const user = await fetchJson(`/api/user/${id}`, undefined, "GET");
-  if (user) return user;
-  else return postUser(firebaseUser);
-};
+export function getUser(uid) {
+  const user = fetchJson(`/api/user/${uid}`, undefined, "GET");
+  if (!user) {
+    postUser(uid);
+  }
+}
+function postUser(uid) {
+  const name = uid?.displayName;
+  return fetchJson("/api/user", undefined, { name, uid }, "POST");
+}

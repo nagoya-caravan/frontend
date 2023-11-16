@@ -1,35 +1,37 @@
-import { signInWithPopup } from "firebase/auth";
+import {
+  signInWithPopup,
+  GoogleAuthProvider,
+  setPersistence,
+  browserLocalPersistence,
+} from "firebase/auth";
 import GoogleButton from "react-google-button";
 import { auth } from "../../utils/firebaseConfig";
-import { GoogleAuthProvider } from "firebase/auth";
+import { getUser } from "../../api/apis";
+
 const LoginButton = () => {
   const handleGoogleLogin = async () => {
     const provider = new GoogleAuthProvider();
-    const user = auth.currentUser;
-    console.log(user);
+
+    // ログイン状態の永続化を設定
+    await setPersistence(auth, browserLocalPersistence);
+
     try {
+      // Googleでのログイン処理
       await signInWithPopup(auth, provider);
+      const firebaseUser = auth.currentUser;
+      if (!firebaseUser) throw new Error("No current user");
 
-      const postUser = async () => {
-        const firebaseUser = auth.currentUser;
-        if (!firebaseUser) throw new Error("No current user");
-
-        try {
-          const existingUser = await getUser(); // getUser関数を呼び出して結果を取得します
-
-          if (existingUser) {
-            console.log("user already exists");
-            return existingUser;
-          } else {
-         
-      postUser();
+      // ユーザー情報の取得
+      await getUser(firebaseUser.uid);
       console.log("Google login successful");
     } catch (error) {
       console.error("Google login failed:", error);
     }
   };
+
   return (
     <GoogleButton onClick={handleGoogleLogin}>Login with Google</GoogleButton>
   );
 };
+
 export default LoginButton;
