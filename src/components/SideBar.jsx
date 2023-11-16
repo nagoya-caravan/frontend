@@ -16,12 +16,144 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-import EventAvailableIcon from "@mui/icons-material/EventAvailable";
-import EditCalendarIcon from "@mui/icons-material/EditCalendar";
 import WidgetsIcon from "@mui/icons-material/Widgets";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import { Avatar } from "@mui/material";
 import URLPopup from "./URLPopup";
+
+export default function MiniDrawer() {
+  const theme = useTheme();
+  const [open, setOpen] = useState(false);
+
+  // const icon = data.img
+
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
+
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
+  // Appbarのopenをboxに入れるとヘッダ消えるかも
+  return (
+    <>
+      <Box sx={{ display: "flex" }}>
+        <CssBaseline />
+        {/* AppBar */}
+        <AppBar position='fixed' open={open}>
+          <Toolbar>
+            {/* ハンバーガーメニュー */}
+            <IconButton
+              color='inherit'
+              aria-label='open drawer'
+              onClick={handleDrawerOpen}
+              edge='start'
+              sx={{
+                marginRight: 5,
+                ...(open && { display: "none" }),
+              }}
+            >
+              <WidgetsIcon />
+            </IconButton>
+            <Typography variant='h6' noWrap component='div'>
+              カレンダー
+            </Typography>
+          </Toolbar>
+        </AppBar>
+
+        {/* Drawer */}
+        <CustomDrawer
+          variant='permanent'
+          open={open}
+          sx={{ position: "fixed" }}
+        >
+          <DrawerHeader>
+            <IconButton onClick={handleDrawerClose}>
+              {theme.direction === "rtl" ? (
+                <ChevronRightIcon />
+              ) : (
+                <ChevronLeftIcon />
+              )}
+            </IconButton>
+          </DrawerHeader>
+          <Divider />
+          {/* List 1 */}
+          <List sx={{}}>
+            <ListItem disablePadding sx={{ display: "block" }}>
+              <ListItemButton
+                sx={{
+                  minHeight: 48,
+                  justifyContent: open ? "initial" : "center",
+                  px: 3.5,
+                }}
+              >
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 2 : "auto",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Link to='/list'>
+                    <CalendarMonthIcon />
+                  </Link>
+                </ListItemIcon>
+                <ListItemText sx={{ opacity: open ? 1 : 0 }}>
+                  カレンダー一覧
+                </ListItemText>
+              </ListItemButton>
+            </ListItem>
+
+            {/* List 2 */}
+            {["カレンダー追加", "ユーザーログイン"].map((text, index) => (
+              <ListItem key={text} disablePadding sx={{ display: "block" }}>
+                <ListItemButton
+                  sx={{
+                    minHeight: 48,
+                    justifyContent: open ? "initial" : "center",
+                    px: 2.5,
+                  }}
+                  onClick={
+                    index === 0
+                      ? () => {
+                          console.log("カレンダー追加");
+                        }
+                      : index === 1
+                      ? () => {
+                          console.log("ユーザーログイン");
+                        }
+                      : null
+                  }
+                >
+                  <ListItemIcon
+                    sx={{
+                      minWidth: 0,
+                      mr: open ? 2 : "auto",
+                      justifyContent: "center",
+                    }}
+                  >
+                    {index === 0 ? (
+                      <URLPopup />
+                    ) : index === 1 ? (
+                      <Avatar
+                        sx={{ width: 30, height: 30, ml: 1 }}
+                        defaultSrc='https://picsum.photos/200'
+                      />
+                    ) : null}
+                  </ListItemIcon>
+                  <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+                </ListItemButton>
+              </ListItem>
+            ))}
+          </List>
+
+          <Divider />
+        </CustomDrawer>
+      </Box>
+      <Outlet />
+    </>
+  );
+}
 
 const drawerWidth = 240;
 
@@ -92,150 +224,3 @@ const CustomDrawer = styled(Drawer, {
     "& .MuiDrawer-paper": closedMixin(theme),
   }),
 }));
-
-export default function MiniDrawer() {
-  const theme = useTheme();
-  const [open, setOpen] = useState(false);
-
-  // const icon = data.img
-
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
-  // Appbarのopenをboxに入れるとヘッダ消えるかも
-  return (
-    <>
-      <Box sx={{ display: "flex" }}>
-        <CssBaseline />
-        {/* AppBar */}
-        <AppBar position='fixed' open={open}>
-          <Toolbar>
-            {/* ハンバーガーメニュー */}
-            <IconButton
-              color='inherit'
-              aria-label='open drawer'
-              onClick={handleDrawerOpen}
-              edge='start'
-              sx={{
-                marginRight: 5,
-                ...(open && { display: "none" }),
-              }}
-            >
-              <WidgetsIcon />
-            </IconButton>
-            <Typography variant='h6' noWrap component='div'>
-              カレンダー
-            </Typography>
-          </Toolbar>
-        </AppBar>
-
-        {/* Drawer */}
-        <CustomDrawer
-          variant='permanent'
-          open={open}
-          sx={{ position: "fixed" }}
-        >
-          <DrawerHeader>
-            <IconButton onClick={handleDrawerClose}>
-              {theme.direction === "rtl" ? (
-                <ChevronRightIcon />
-              ) : (
-                <ChevronLeftIcon />
-              )}
-            </IconButton>
-          </DrawerHeader>
-          <Divider />
-          {/* List 1 */}
-          <List sx={{}}>
-            {["カレンダー一覧", "カレンダー編集", "カレンダー追加"].map(
-              (text, index) => (
-                <ListItem key={text} disablePadding sx={{ display: "block" }}>
-                  <ListItemButton
-                    sx={{
-                      minHeight: 48,
-                      justifyContent: open ? "initial" : "center",
-                      px: 2.5,
-                    }}
-                  >
-                    <ListItemIcon
-                      sx={{
-                        minWidth: 0,
-                        mr: open ? 2 : "auto",
-                        justifyContent: "center",
-                      }}
-                    >
-                      {index === 0 ? (
-                        <CalendarMonthIcon />
-                      ) : index === 1 ? (
-                        <EditCalendarIcon />
-                      ) : index === 2 ? (
-                        <EventAvailableIcon />
-                      ) : null}
-                    </ListItemIcon>
-                    <ListItemText
-                      primary={text}
-                      sx={{ opacity: open ? 1 : 0 }}
-                    />
-                  </ListItemButton>
-                </ListItem>
-              )
-            )}
-          </List>
-          <Divider />
-          {/* List 2 */}
-          <List>
-            {["カレンダー追加", "ユーザーログイン"].map((text, index) => (
-              <ListItem key={text} disablePadding sx={{ display: "block" }}>
-                <ListItemButton
-                  sx={{
-                    minHeight: 48,
-                    justifyContent: open ? "initial" : "center",
-                    px: 2.5,
-                  }}
-                  onClick={
-                    index === 0
-                      ? () => {
-                          console.log("カレンダー追加");
-                        }
-                      : index === 1
-                      ? () => {
-                          console.log("ユーザーログイン");
-                        }
-                      : null
-                  }
-                >
-                  <ListItemIcon
-                    sx={{
-                      minWidth: 0,
-                      mr: open ? 2 : "auto",
-                      justifyContent: "center",
-                    }}
-                  >
-                    {index === 0 ? (
-                      <URLPopup />
-                    ) : index === 1 ? (
-                      <Avatar
-                        sx={{ width: 30, height: 30 }}
-                        defaultSrc='https://picsum.photos/200'
-                        width={20}
-                        height={20}
-                      />
-                    ) : null}
-                  </ListItemIcon>
-                  <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-                </ListItemButton>
-              </ListItem>
-            ))}
-          </List>
-
-          <Divider />
-        </CustomDrawer>
-      </Box>
-      <Outlet />
-    </>
-  );
-}
