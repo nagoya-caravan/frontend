@@ -15,7 +15,6 @@ export function CalendarEvents(props) {
   const [eventList, setEventList] = useState([]);
   if (firebaseUser == null) {
     return <Navigate to={"/"}/>;
-    // return <Box sx={{backgroundColor: "red"}}>user is null</Box>;
   }
   useEffect(() => {
     if (isFirstWeek) {
@@ -38,6 +37,7 @@ export function CalendarEvents(props) {
     while (restEvents.length > 0) {
       console.log("while");
       if (position >= 7) position = 0;
+      console.log(position)
       const currentDate = week[position].date;
       if (firstDatetime == null) break;
       const i = restEvents.findIndex(value => {
@@ -53,7 +53,7 @@ export function CalendarEvents(props) {
       const event = restEvents[i];
       restEvents.splice(i, 1);
       renderEvents.push(event);
-      position += event.datePeriod();
+      position += event.datePeriod(firstDatetime);
 
       setEventList(renderEvents);
     }
@@ -69,15 +69,7 @@ export function CalendarEvents(props) {
             sx={{
               width: (
                   (width / 7)
-                  * (Math.floor(
-                      (
-                        value.endDateLast().getTime() -
-                        (firstDatetime.getTime() > value.startDateFirst().getTime()
-                          ? firstDatetime.getTime()
-                          : value.startDateFirst().getTime())
-                      ) / (1000 * 60 * 60 * 24),
-                    )
-                    + 1)
+                  * value.datePeriod(firstDatetime)
                 )
                 + "px",
             }}

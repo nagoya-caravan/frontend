@@ -1,9 +1,8 @@
 import * as React from "react";
-import {Box, Button, CardContent, Chip, Grid, Modal, Typography} from "@mui/material";
+import {Box, CardContent, Chip, Grid, Modal, Typography} from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import EventIcon from "@mui/icons-material/Event";
-import LockOpenIcon from "@mui/icons-material/LockOpen";
 
 // タイトル、日付、要件、一般公開（チェックボックスをつける）、submitボタンをつける
 
@@ -70,7 +69,7 @@ export default function DetailModal(props) {
                 gutterBottom
                 sx={{margin: "10px 0 30px 0"}}
               >
-                予定タイトル
+                {eventData.event_title || "予定"}
               </Typography>
               {/* 日付 */}
               <Box
@@ -108,8 +107,8 @@ export default function DetailModal(props) {
                 <Typography>終了：{eventData.end.toString()}</Typography>
               </Box>
 
-              {/* カードタイトル */}
-              <Box
+              {/* 説明 */}
+              {eventData.description && <Box
                 sx={{
                   display: "flex",
                   alignItems: "center",
@@ -117,32 +116,21 @@ export default function DetailModal(props) {
                 }}
               >
                 <EventIcon sx={{marginRight: "10px"}}/>
-                <Typography variant="h6">予定内容： {eventData.description || "説明"}</Typography>
-              </Box>
-
-              {/* カード詳細 */}
-              <Box
+                <Typography variant="h6">予定内容： {eventData.description}</Typography>
+              </Box>}
+              {/* 場所 */}
+              {eventData.location && <Box
                 sx={{
                   display: "flex",
                   alignItems: "center",
                   marginTop: "20px",
                 }}
               >
-                <LockOpenIcon sx={{marginRight: "10px"}}/>
-                <Typography variant="h7" color="textSecondary">
-                  公開：
-                  <input type="checkbox" style={{lineHeight: 0}}/>
-                </Typography>
-              </Box>
+                <EventIcon sx={{marginRight: "10px"}}/>
+                <Typography variant="h6">場所： {eventData.location}</Typography>
+              </Box>}
 
-              <Box sx={{textAlign: "right"}}>
-                <Button
-                  variant="outlined"
-                  sx={{display: "inline-block", position: "relative"}}
-                >
-                  設定
-                </Button>
-              </Box>
+
             </CardContent>
           </Grid>
         </Box>

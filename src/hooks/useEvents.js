@@ -16,8 +16,16 @@ class EventData {
     this.ical_uid = event.ical_uid;
   }
 
-  datePeriod() {
-    return this.end.getDate() - this.start.getDate() + 1;
+  datePeriod(firstDatetime) {
+    return (Math.floor(
+        (
+          this.endDateLast().getTime() -
+          (firstDatetime.getTime() > this.startDateFirst().getTime()
+            ? firstDatetime.getTime()
+            : this.startDateFirst().getTime())
+        ) / (1000 * 60 * 60 * 24),
+      )
+      + 1);
   }
 
   startDateFirst() {
