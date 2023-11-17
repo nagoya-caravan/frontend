@@ -20,7 +20,7 @@ import WidgetsIcon from "@mui/icons-material/Widgets";
 import { Link, Outlet } from "react-router-dom";
 import { Avatar } from "@mui/material";
 import URLPopup from "./URLPopup";
-
+import handleGoogleLogin from "../components/auth/handleGoogleLogin";
 export default function MiniDrawer() {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
@@ -41,17 +41,17 @@ export default function MiniDrawer() {
         <CssBaseline />
         {/* AppBar */}
         <AppBar
-          position="fixed"
+          position='fixed'
           open={open}
           sx={{ backgroundColor: "rgb(130, 217, 95)" }}
         >
           <Toolbar>
             {/* ハンバーガーメニュー */}
             <IconButton
-              color="inherit"
-              aria-label="open drawer"
+              color='inherit'
+              aria-label='open drawer'
               onClick={handleDrawerOpen}
-              edge="start"
+              edge='start'
               sx={{
                 marginRight: 5,
                 ...(open && { display: "none" }),
@@ -59,7 +59,7 @@ export default function MiniDrawer() {
             >
               <WidgetsIcon />
             </IconButton>
-            <Typography variant="h6" noWrap component="div">
+            <Typography variant='h6' noWrap component='div'>
               カレンダー
             </Typography>
           </Toolbar>
@@ -67,7 +67,7 @@ export default function MiniDrawer() {
 
         {/* Drawer */}
         <CustomDrawer
-          variant="permanent"
+          variant='permanent'
           open={open}
           sx={{ position: "fixed", zIndex: 10 }}
         >
@@ -98,7 +98,7 @@ export default function MiniDrawer() {
                     justifyContent: "center",
                   }}
                 >
-                  <Link to="/list">
+                  <Link to='/list'>
                     <CalendarMonthIcon />
                   </Link>
                 </ListItemIcon>
@@ -124,7 +124,7 @@ export default function MiniDrawer() {
                         }
                       : index === 1
                       ? () => {
-                          console.log("ユーザーログイン");
+                          handleGoogleLogin();
                         }
                       : null
                   }
@@ -141,7 +141,7 @@ export default function MiniDrawer() {
                     ) : index === 1 ? (
                       <Avatar
                         sx={{ width: 30, height: 30, ml: 1 }}
-                        defaultSrc="https://picsum.photos/200"
+                        defaultSrc='https://picsum.photos/200'
                       />
                     ) : null}
                   </ListItemIcon>
