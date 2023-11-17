@@ -7,7 +7,7 @@ import {useState} from "react";
 
 const TopPage = () => {
   const [firebaseUser, seuFirebaseUser] = useState(firebaseAuth.currentUser);
-  return firebaseUser ? <Navigate to={"/calendar/3"}/>
+  return firebaseUser ? <Navigate to={"/calendar/4"}/>
     : (
       <>
         <Box
