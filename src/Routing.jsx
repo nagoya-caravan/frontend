@@ -10,8 +10,8 @@ const Routing = () => {
     <Routes>
       <Route path='/' element={<TopPage />} />
       <Route path='/calendar' element={<SideBar />}>
-        <Route path='/list' element={<CalenderList />} />
-        <Route path='/:calendar_id' element={<CalendarPage />} />
+        <Route path='list' element={<CalenderList />} />
+        <Route path=':calendar_id' element={<CalendarPage />} />
       </Route>
       <Route path='*' element={<NotFound />} />
     </Routes>
