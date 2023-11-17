@@ -41,7 +41,7 @@ export default function DetailModal(props) {
           mx: "auto",
           zIndex: 1,
         }}
-        label={"予定"}
+        label={eventData.event_title || "予定"}
       />
 
       <Modal
@@ -87,7 +87,25 @@ export default function DetailModal(props) {
                     marginRight: "10px",
                   }}
                 />
-                <Typography>日付：{"2023/11/15"}</Typography>
+                <Typography>開始：{eventData.start.toString()}</Typography>
+              </Box>
+
+              {/* 日付 */}
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  marginTop: "20px",
+                }}
+              >
+                <CalendarMonthIcon
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    marginRight: "10px",
+                  }}
+                />
+                <Typography>終了：{eventData.end.toString()}</Typography>
               </Box>
 
               {/* カードタイトル */}
@@ -99,7 +117,7 @@ export default function DetailModal(props) {
                 }}
               >
                 <EventIcon sx={{marginRight: "10px"}}/>
-                <Typography variant="h6">予定内容： </Typography>
+                <Typography variant="h6">予定内容： {eventData.description || "説明"}</Typography>
               </Box>
 
               {/* カード詳細 */}

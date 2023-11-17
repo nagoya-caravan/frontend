@@ -82,7 +82,7 @@ export function CalendarEvents(props) {
                 + "px",
             }}
             key={index}>
-            <DetailModal/>
+            <DetailModal eventData={value}/>
           </Box>
           : <Box sx={{
             width: (width / 7) + "px",
