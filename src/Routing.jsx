@@ -8,14 +8,12 @@ import NotFound from "./views/NotFoundPage";
 const Routing = () => {
   return (
     <Routes>
-      <Route path="/" element={<TopPage />} />
-      <Route path="/" element={<SideBar />}>
-        <Route path="/list" element={<CalenderList />} />
-        <Route path="/calendar" element={<CalendarPage />} />
-
-        {/* <Route path='/list/:id' element={<Calender />} /> */}
+      <Route path='/' element={<TopPage />} />
+      <Route path='/calendar' element={<SideBar />}>
+        <Route path='/list' element={<CalenderList />} />
+        <Route path='/:calendar_id' element={<CalendarPage />} />
       </Route>
-      <Route path="*" element={<NotFound />} />
+      <Route path='*' element={<NotFound />} />
     </Routes>
   );
 };
