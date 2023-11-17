@@ -18,9 +18,8 @@ export interface LsUser {
   user_token: string;
 }
 
-export interface Empty {
-}
+export interface Empty {}
 
 export enum ErrorIds {
-  USER_NOT_FOUND = "USER_NOT_FOUND"
+  USER_NOT_FOUND = "USER_NOT_FOUND",
 }
