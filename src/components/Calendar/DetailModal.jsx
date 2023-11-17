@@ -1,5 +1,5 @@
 import * as React from "react";
-import {Box, Button, CardContent, Chip, Grid, Modal, Typography,} from "@mui/material";
+import {Box, Button, CardContent, Chip, Grid, Modal, Typography} from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import EventIcon from "@mui/icons-material/Event";
@@ -22,7 +22,7 @@ const style = {
 };
 
 export default function DetailModal(props) {
-  const {eventData} = props
+  const {eventData} = props;
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => {
     setOpen(true);
@@ -41,9 +41,9 @@ export default function DetailModal(props) {
           mx: "auto",
           zIndex: 1,
         }}
-      >
-        予定
-      </Chip>
+        label={"予定"}
+      />
+
       <Modal
         open={open}
         onClose={handleClose}

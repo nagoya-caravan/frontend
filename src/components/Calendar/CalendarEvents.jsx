@@ -2,11 +2,10 @@ import {Box} from "@mui/material";
 import {useEvents} from "../../hooks/useEvents.js";
 import {firebaseAuth} from "../../utils/firebaseConfig.js";
 import {useParams} from "react-router-dom";
-import {datetimeFirst, datetimeLast} from "../../utils/datetimeUtil.js";
 import DetailModal from "./DetailModal.jsx";
 
-export function CalenderEvents(props) {
-  const {year, month, week, weekElementRef} = props;
+export function CalendarEvents(props) {
+  const {year, month, week, isFirstWeek, isLastWeek, weekElementRef} = props;
   const {calendar_id} = useParams();
   const firebaseUser = firebaseAuth.currentUser;
   if (firebaseUser == null) {
@@ -14,7 +13,7 @@ export function CalenderEvents(props) {
     return <Box sx={{backgroundColor: "red"}}>user is null</Box>;
   }
   const events = useEvents(
-    firebaseUser, calendar_id, datetimeFirst(year, month, week[0]), datetimeLast(year, month, week[6]),
+    firebaseUser, calendar_id, year, month, week, isFirstWeek, isLastWeek,
   );
 
   const renderEvents = [];
@@ -38,7 +37,7 @@ export function CalenderEvents(props) {
   const width = element ? element.offsetWidth : 0;
   return (
     <Box sx={{position: "absolute", top: 0, left: 0, display: "flex", flexWrap: "wrap"}}>
-      {restEvents.map(value => {
+      {renderEvents.map(value => {
         return (
           <Box sx={{width: width}}>
             value && <DetailModal/>

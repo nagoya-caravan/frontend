@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {FetchBuilder} from "../api/fetch";
-import {dateFromStr} from "../utils/datetimeUtil";
+import {dateFromStr, datetimeFirst, datetimeLast, strFromDate} from "../utils/datetimeUtil";
 
 class EventData {
   constructor(event) {
@@ -33,11 +33,35 @@ class EventData {
   }
 }
 
-export function useEvents(firebaseUser, calenderId, startDate, endDate) {
+export function useEvents(firebaseUser, calenderId, year, month, week, isFirstWeek, isLastWeek) {
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
     const search = new URLSearchParams();
+    const first = datetimeFirst(year, month, week[0].date);
+    const last = datetimeLast(year, month, week[6].date);
+    if (isFirstWeek) {
+      let month = first.getMonth();
+      month -= 1;
+      if (month < 0) {
+        month = 11;
+        first.setFullYear(first.getFullYear() - 1);
+      }
+      first.setMonth(month);
+    }
+    console.log(year, month, week, isFirstWeek, isLastWeek)
+    if (isLastWeek) {
+      let month = last.getMonth();
+      month += 1;
+      if (month > 11) {
+        month = 0;
+        last.setFullYear(last.getFullYear() + 1);
+      }
+      last.setMonth(month);
+    }
+
+    search.set("start", strFromDate(first));
+    search.set("end", strFromDate(last));
     new FetchBuilder(`/api/calender/${calenderId}/public-event`)
       .searchParams(search)
       .method("GET")
@@ -45,7 +69,9 @@ export function useEvents(firebaseUser, calenderId, startDate, endDate) {
       .fetch()
       .then((values) => {
         setEvents(values.map(value => EventData(value)));
-      });
-  }, [firebaseUser, calenderId, startDate, endDate]);
+        console.log("event fetched!");
+      })
+      .catch(reason => console.error(reason.apiErrorResponse.message));
+  }, [firebaseUser, calenderId, year, month, week]);
   return events;
 }

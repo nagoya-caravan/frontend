@@ -1,11 +1,11 @@
 import {Box} from "@mui/material";
 import DetailModal from "./DetailModal";
-import {CalenderEvents} from "./CalenderEvents.jsx";
+import {CalendarEvents} from "./CalendarEvents.jsx";
 import {useRef} from "react";
 
 const WeekRow = (props) => {
-  const {year, month, week} = props;
-  const weekElementRef = useRef()
+  const {year, month, week,isFirstWeek, isLastWeek} = props;
+  const weekElementRef = useRef();
 
   //ここでapiからデータを取得
   return (
@@ -28,7 +28,7 @@ const WeekRow = (props) => {
           </Box>
         ))}
       </Box>
-      <CalenderEvents {...props} weekElementRef={weekElementRef}/>
+      <CalendarEvents year={year} month={month} week={week} isFirstWeek={isFirstWeek} isLastWeek={isLastWeek} weekElementRef={weekElementRef}/>
     </Box>
   );
 };

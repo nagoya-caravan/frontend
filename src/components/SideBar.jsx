@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { styled, useTheme } from "@mui/material/styles";
+import {useState} from "react";
+import {styled, useTheme} from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import MuiAppBar from "@mui/material/AppBar";
@@ -17,8 +17,8 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import WidgetsIcon from "@mui/icons-material/Widgets";
-import { Link, Outlet } from "react-router-dom";
-import { Avatar } from "@mui/material";
+import {Link, Outlet} from "react-router-dom";
+import {Avatar} from "@mui/material";
 import URLPopup from "./URLPopup";
 
 export default function MiniDrawer() {
@@ -37,13 +37,13 @@ export default function MiniDrawer() {
   // Appbarのopenをboxに入れるとヘッダ消えるかも
   return (
     <>
-      <Box sx={{ display: "flex" }}>
-        <CssBaseline />
+      <Box sx={{display: "flex"}}>
+        <CssBaseline/>
         {/* AppBar */}
         <AppBar
           position="fixed"
           open={open}
-          sx={{ backgroundColor: "rgb(130, 217, 95)" }}
+          sx={{backgroundColor: "rgb(130, 217, 95)"}}
         >
           <Toolbar>
             {/* ハンバーガーメニュー */}
@@ -54,10 +54,10 @@ export default function MiniDrawer() {
               edge="start"
               sx={{
                 marginRight: 5,
-                ...(open && { display: "none" }),
+                ...(open && {display: "none"}),
               }}
             >
-              <WidgetsIcon />
+              <WidgetsIcon/>
             </IconButton>
             <Typography variant="h6" noWrap component="div">
               カレンダー
@@ -69,21 +69,21 @@ export default function MiniDrawer() {
         <CustomDrawer
           variant="permanent"
           open={open}
-          sx={{ position: "fixed", zIndex: 10 }}
+          sx={{position: "fixed", zIndex: 10}}
         >
           <DrawerHeader>
             <IconButton onClick={handleDrawerClose}>
               {theme.direction === "rtl" ? (
-                <ChevronRightIcon />
+                <ChevronRightIcon/>
               ) : (
-                <ChevronLeftIcon />
+                <ChevronLeftIcon/>
               )}
             </IconButton>
           </DrawerHeader>
-          <Divider />
+          <Divider/>
           {/* List 1 */}
           <List sx={{}}>
-            <ListItem disablePadding sx={{ display: "block" }}>
+            <ListItem disablePadding sx={{display: "block"}}>
               <ListItemButton
                 sx={{
                   minHeight: 48,
@@ -99,10 +99,10 @@ export default function MiniDrawer() {
                   }}
                 >
                   <Link to="/list">
-                    <CalendarMonthIcon />
+                    <CalendarMonthIcon/>
                   </Link>
                 </ListItemIcon>
-                <ListItemText sx={{ opacity: open ? 1 : 0 }}>
+                <ListItemText sx={{opacity: open ? 1 : 0}}>
                   カレンダー一覧
                 </ListItemText>
               </ListItemButton>
@@ -110,7 +110,7 @@ export default function MiniDrawer() {
 
             {/* List 2 */}
             {["カレンダー追加", "ユーザーログイン"].map((text, index) => (
-              <ListItem key={text} disablePadding sx={{ display: "block" }}>
+              <ListItem key={text} disablePadding sx={{display: "block"}}>
                 <ListItemButton
                   sx={{
                     minHeight: 48,
@@ -120,13 +120,13 @@ export default function MiniDrawer() {
                   onClick={
                     index === 0
                       ? () => {
-                          console.log("カレンダー追加");
-                        }
+                        console.log("カレンダー追加");
+                      }
                       : index === 1
-                      ? () => {
+                        ? () => {
                           console.log("ユーザーログイン");
                         }
-                      : null
+                        : null
                   }
                 >
                   <ListItemIcon
@@ -137,24 +137,25 @@ export default function MiniDrawer() {
                     }}
                   >
                     {index === 0 ? (
-                      <URLPopup />
+                      <URLPopup/>
                     ) : index === 1 ? (
                       <Avatar
-                        sx={{ width: 30, height: 30, ml: 1 }}
-                        defaultSrc="https://picsum.photos/200"
+                        sx={{width: 30, height: 30, ml: 1}}
+                        // defaultSrc not exists
+                        // defaultSrc="https://picsum.photos/200"
                       />
                     ) : null}
                   </ListItemIcon>
-                  <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+                  <ListItemText primary={text} sx={{opacity: open ? 1 : 0}}/>
                 </ListItemButton>
               </ListItem>
             ))}
           </List>
 
-          <Divider />
+          <Divider/>
         </CustomDrawer>
       </Box>
-      <Outlet />
+      <Outlet/>
     </>
   );
 }
@@ -184,7 +185,7 @@ const closedMixin = (theme) => ({
 });
 
 // スタイリングされたコンポーネント
-const DrawerHeader = styled("div")(({ theme }) => ({
+const DrawerHeader = styled("div")(({theme}) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "flex-end",
@@ -195,7 +196,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 // スタイリングされたAppBar
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
-})(({ theme, open }) => ({
+})(({theme, open}) => ({
   zIndex: theme.zIndex.drawer + 1,
   transition: theme.transitions.create(["width", "margin"], {
     easing: theme.transitions.easing.sharp,
@@ -214,7 +215,7 @@ const AppBar = styled(MuiAppBar, {
 // スタイリングされたDrawer
 const CustomDrawer = styled(Drawer, {
   shouldForwardProp: (prop) => prop !== "open",
-})(({ theme, open }) => ({
+})(({theme, open}) => ({
   width: drawerWidth,
   flexShrink: 0,
   whiteSpace: "nowrap",

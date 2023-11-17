@@ -6,7 +6,9 @@ const handleGoogleLogout = () => {
     const provider = new GoogleAuthProvider();
     try {
       await signInWithPopup(auth, provider);
-      window.location.href = "/login";
+      // not use
+      // use <Navigate to={"/login"}/>
+      // window.location.href = "/login";
       console.log("Google logout successful");
     } catch (error) {
       console.error("Google logout failed:", error);

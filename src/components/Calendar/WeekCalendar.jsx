@@ -1,16 +1,25 @@
 import {Box} from "@mui/material";
 import WeekRow from "./WeekRow";
 import moment from "moment";
-import {useEvents} from "../../hooks/useEvents.js";
 
 const WeekCalendar = (props) => {
 
   const {year, month} = props;
   const weeksOfMonth = getMonthData(year, month); // 月初めの日付と曜日を計算する関数
   return (<Box>
-    {weeksOfMonth.map((week, index) => (
-      <WeekRow key={index} week={week} year={year} month={month}/>
-    ))}
+    {weeksOfMonth.map((week, index) => {
+      let isFirstWeek = false;
+      let isLastWeek = false;
+      if (index === 0 && week[0].date !== 1) {
+        isFirstWeek = true;
+      }
+      if (index === weeksOfMonth.length - 1 && week[6].date <= 6) {
+        isLastWeek = true;
+      }
+      console.log(weeksOfMonth.length);
+      return <WeekRow key={index} week={week} year={year} month={month} isFirstWeek={isFirstWeek}
+                      isLastWeek={isLastWeek}/>;
+    })}
   </Box>);
 };
 
