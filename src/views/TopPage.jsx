@@ -1,7 +1,19 @@
 import { Box, Typography } from "@mui/material";
 import GoogleButton from "react-google-button";
 import handleGoogleLogin from "../components/auth/handleGoogleLogin";
+import { useNavigate } from "react-router-dom";
+
 const TopPage = () => {
+  const navigate = useNavigate();
+  const handleListRedirect = async () => {
+    try {
+      await handleGoogleLogin();
+      navigate("calendar/list");
+    } catch (error) {
+      console.error("Google login failed:", error);
+    }
+  };
+
   return (
     <>
       <Box
@@ -27,7 +39,7 @@ const TopPage = () => {
             p: 2,
           }}
         >
-          <GoogleButton onClick={handleGoogleLogin} />
+          <GoogleButton onClick={handleListRedirect} />
         </Box>
       </Box>
     </>
