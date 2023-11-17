@@ -2,6 +2,7 @@ export interface Calender {
   calender_id?: number;
   calender_name: string;
   ical_url: string;
+  user_token: string;
 }
 
 export interface CalenderId {
@@ -18,9 +19,8 @@ export interface LsUser {
   user_token: string;
 }
 
-export interface Empty {
-}
+export interface Empty {}
 
 export enum ErrorIds {
-  USER_NOT_FOUND = "USER_NOT_FOUND"
+  USER_NOT_FOUND = "USER_NOT_FOUND",
 }
