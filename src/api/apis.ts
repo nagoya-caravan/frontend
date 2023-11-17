@@ -15,7 +15,7 @@ export function getCalenderList(calender: Calender) {
 
 export async function getUser(firebaseUser) {
   const user = await fetchJson<LsUser, undefined>(
-    `/api/user`, undefined, undefined, "GET"
+    `/api/user`, undefined, undefined, "GET", undefined, firebaseUser.uid
   ).catch(reason => {
     if ((reason as ApiError).apiErrorResponse.error_id == ErrorIds.USER_NOT_FOUND) {
       return undefined
