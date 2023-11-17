@@ -10,24 +10,23 @@ export function editCalender(calender_id: number, calender: Calender) {
   return fetchJson(`/api/calender/${calender_id}`, undefined, calender, "PUT");
 }
 
+export function getCalenderList(calender: Calender) {
+  return fetchJson("/api/calender", undefined, calender, "GET");
+}
+
 export async function getUser(firebaseUser) {
   try {
-    const user = await fetchJson(
-      `/api/user/${firebaseUser.uid}`,
-      undefined,
-      "GET"
-    );
+    const user = await fetchJson(`/api/user/`, undefined, undefined, "GET");
     if (!user) {
       postUser({
         username: firebaseUser.displayName,
-        password: firebaseUser.uid,
+        token: firebaseUser.uid,
       });
     }
   } catch (error) {
     console.error("Error fetching user:", error);
   }
 }
-
 async function postUser(user: User) {
   try {
     return await fetchJson("aoi/user", undefined, user, "POST");
