@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
-
-
+import GoogleButton from "react-google-button";
+import handleGoogleLogin from "../components/auth/handleGoogleLogin";
 const TopPage = () => {
   return (
     <>
@@ -26,8 +26,9 @@ const TopPage = () => {
             alignItems: "center",
             p: 2,
           }}
-
-        ></Box>
+        >
+          <GoogleButton onClick={handleGoogleLogin} />
+        </Box>
       </Box>
     </>
   );
