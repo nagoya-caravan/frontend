@@ -13,6 +13,19 @@ export interface ApiErrorResponse {
   message: string;
 }
 
+export interface CalenderEvent {
+  calender_id: number;
+  is_show: boolean;
+  all_day: boolean;
+  start: string;
+  end: string;
+  event_title: string | undefined;
+  description: string | undefined;
+  location: string | undefined;
+  ical_uid: string | undefined;
+  event_id: number | undefined;
+}
+
 export interface LsUser {
   user_name?: string;
   user_token: string;

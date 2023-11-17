@@ -23,7 +23,7 @@ const handleGoogleLogin = async () => {
     // ユーザー情報の取得
     await getUser(firebaseUser);
     //リダイレクト処理
-    window.location.href = "/calendar";
+    window.location.href = "/calendar/1";
     console.log("Google login successful");
   } catch (error) {
     console.error("Google login failed:", error);

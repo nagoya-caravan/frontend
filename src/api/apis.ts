@@ -52,11 +52,8 @@ export async function getUser(firebaseUser) {
       user_name: firebaseUser.displayName,
       user_token: firebaseUser.uid,
     }).catch((reason: ApiError) => {
-      console.error(reason.apiErrorResponse.message);
-      if (reason.apiErrorResponse.error_id == ErrorIds.USER_NOT_FOUND) {
-        return undefined;
-      }
-      throw reason;
+      console.error(reason.apiErrorResponse.message)
+      throw reason
     });
   }
 }

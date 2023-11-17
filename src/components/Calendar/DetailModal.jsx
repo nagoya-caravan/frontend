@@ -1,13 +1,5 @@
 import * as React from "react";
-import {
-  Box,
-  Button,
-  Modal,
-  Typography,
-  Grid,
-  CardContent,
-  Chip,
-} from "@mui/material";
+import {Box, Button, CardContent, Chip, Grid, Modal, Typography,} from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import EventIcon from "@mui/icons-material/Event";
@@ -29,7 +21,8 @@ const style = {
   pb: 3,
 };
 
-export default function DetailModal() {
+export default function DetailModal(props) {
+  const {eventData} = props
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => {
     setOpen(true);
@@ -57,11 +50,11 @@ export default function DetailModal() {
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-        <Box sx={{ ...style, width: 400 }}>
+        <Box sx={{...style, width: 400}}>
           <Grid item xs={3}>
             {/* カードのペーパーコンポーネント */}
 
-            <Box sx={{ textAlign: "right", margin: "0 30px -20px 0" }}>
+            <Box sx={{textAlign: "right", margin: "0 30px -20px 0"}}>
               <CloseIcon
                 sx={{
                   display: "inline-block",
@@ -75,7 +68,7 @@ export default function DetailModal() {
               <Typography
                 variant="h4"
                 gutterBottom
-                sx={{ margin: "10px 0 30px 0" }}
+                sx={{margin: "10px 0 30px 0"}}
               >
                 予定タイトル
               </Typography>
@@ -105,7 +98,7 @@ export default function DetailModal() {
                   marginTop: "20px",
                 }}
               >
-                <EventIcon sx={{ marginRight: "10px" }} />
+                <EventIcon sx={{marginRight: "10px"}}/>
                 <Typography variant="h6">予定内容： </Typography>
               </Box>
 
@@ -117,17 +110,17 @@ export default function DetailModal() {
                   marginTop: "20px",
                 }}
               >
-                <LockOpenIcon sx={{ marginRight: "10px" }} />
+                <LockOpenIcon sx={{marginRight: "10px"}}/>
                 <Typography variant="h7" color="textSecondary">
                   公開：
-                  <input type="checkbox" style={{ lineHeight: 0 }} />
+                  <input type="checkbox" style={{lineHeight: 0}}/>
                 </Typography>
               </Box>
 
-              <Box sx={{ textAlign: "right" }}>
+              <Box sx={{textAlign: "right"}}>
                 <Button
                   variant="outlined"
-                  sx={{ display: "inline-block", position: "relative" }}
+                  sx={{display: "inline-block", position: "relative"}}
                 >
                   設定
                 </Button>
