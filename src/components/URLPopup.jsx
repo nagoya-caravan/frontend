@@ -9,10 +9,12 @@ import {
   Box,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-
+import { createCalender } from "../api/apis";
 const URLPopup = () => {
   const [open, setOpen] = useState(false);
   const [inputURL, setInputURL] = useState("");
+  const [calendarName, setCalendarName] = useState("");
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -50,27 +52,43 @@ const URLPopup = () => {
                 mb: 2,
               }}
             >
-              CalendarURL
+              カレンダー作成
             </Typography>
             <Input
-              placeholder='CalendarURL'
+              placeholder='カレンダーURL'
               value={inputURL}
               onChange={(e) => setInputURL(e.target.value)} // 3. Detecting input changes
             />
             {!isValidURL && inputURL && (
               <Typography color='error'>URLが間違っています</Typography>
             )}
+            <Input
+              sx={{ mt: 3 }}
+              placeholder='カレンダー名'
+              value={calendarName}
+              onChange={(e) => setCalendarName(e.target.value)}
+            />
           </Box>
           <Box>
             <Button
               sx={{
                 position: "relative",
-                top: "75%",
-                left: "120%",
+                top: "85%",
+                left: "30%",
               }}
               variant='contained'
-              onClick={handleClose}
-              disabled={!isValidURL}
+              onClick={
+                isValidURL
+                  ? () => {
+                      setOpen(false);
+                      createCalender({
+                        calender_name: calendarName,
+                        ical_url: inputURL,
+                      });
+                    }
+                  : () => {}
+              }
+              disabled={!isValidURL || calendarName === ""}
             >
               作成
             </Button>
