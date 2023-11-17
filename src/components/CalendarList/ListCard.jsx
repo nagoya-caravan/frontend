@@ -29,10 +29,10 @@ const CalendarListCard = () => {
         console.log(err);
       });
   }, []);
-  const navigate = useNavigate();
-  const handleItemClick = (calendar_id) => {
-    navigate(`/calendar/${calendar_id}`);
-  };
+  // const navigate = useNavigate();
+  // const handleItemClick = (calendar_id) => {
+  //   navigate(`/calendar/${calendar_id}`);
+  // };
 
   const data = calendars;
 
@@ -87,7 +87,7 @@ const CalendarListCard = () => {
               <Box>
                 <Button
                   onClick={() => {
-                    handleItemClick(item.user_id);
+                    // handleItemClick(item.user_id);
                   }}
                 >
                   編集
