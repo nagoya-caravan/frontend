@@ -1,6 +1,5 @@
-import { Calender } from "./objects";
-import { fetchJson } from "./fetch";
-import { User } from "./objects";
+import {Calender, ErrorIds, LsUser} from "./objects";
+import {ApiError, fetchJson} from "./fetch";
 
 export function createCalender(calender: Calender) {
   return fetchJson("/api/calender", undefined, calender, "POST");
@@ -15,22 +14,28 @@ export function getCalenderList(calender: Calender) {
 }
 
 export async function getUser(firebaseUser) {
-  try {
-    const user = await fetchJson(`/api/user/`, undefined, undefined, "GET");
-    if (!user) {
-      postUser({
-        username: firebaseUser.displayName,
-        token: firebaseUser.uid,
-      });
+  const user = await fetchJson<LsUser, undefined>(
+    `/api/user`, undefined, undefined, "GET"
+  ).catch(reason => {
+    if ((reason as ApiError).apiErrorResponse.error_id == ErrorIds.USER_NOT_FOUND) {
+      return undefined
     }
-  } catch (error) {
-    console.error("Error fetching user:", error);
+    throw reason
+  });
+  if (!user) {
+    await postUser({
+      user_name: firebaseUser.displayName,
+      user_token: firebaseUser.uid,
+    }).catch((reason: ApiError) => {
+      console.error(reason.apiErrorResponse.message)
+      if (reason.apiErrorResponse.error_id == ErrorIds.USER_NOT_FOUND) {
+        return undefined
+      }
+      throw reason
+    });
   }
 }
-async function postUser(user: User) {
-  try {
-    return await fetchJson("aoi/user", undefined, user, "POST");
-  } catch (error) {
-    console.error("Error posting user:", error);
-  }
+
+async function postUser(user: LsUser) {
+  return await fetchJson("/api/user", undefined, user, "POST");
 }

@@ -13,9 +13,14 @@ export interface ApiErrorResponse {
   message: string;
 }
 
-export interface User {
-  username?: string;
-  token: string;
+export interface LsUser {
+  user_name?: string;
+  user_token: string;
 }
 
-export interface Empty {}
+export interface Empty {
+}
+
+export enum ErrorIds {
+  USER_NOT_FOUND = "USER_NOT_FOUND"
+}

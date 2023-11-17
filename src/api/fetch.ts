@@ -1,3 +1,5 @@
+import {ApiErrorResponse} from "./objects";
+
 const Access_Control_Allow_Origin = "hazakura-api-test.kigawa.net"
 const BASE_URL = "https://hazakura-api-test.kigawa.net/"
 
@@ -18,6 +20,15 @@ export class JsonError extends Error {
         this.init = init
         this.response = response
         this.reason = reason
+    }
+}
+
+export class ApiError extends Error {
+    readonly apiErrorResponse: ApiErrorResponse
+
+    constructor(apiErrorResponse: ApiErrorResponse) {
+        super()
+        this.apiErrorResponse = apiErrorResponse
     }
 }
 
@@ -75,8 +86,7 @@ export async function fetchJson<RESULT = never, BODY = never>(
         throw new JsonError(urlObj, initObj, res, undefined)
     }
     if (!res.ok) {
-        console.error(urlObj, res.status, res.statusText)
-        throw new JsonError(urlObj, initObj, res, res.statusText)
+        throw new ApiError(await res.json())
     }
     return await res.json().catch((reason) => {
         console.error(url, reason)
