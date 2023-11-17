@@ -22,7 +22,9 @@ const URLPopup = () => {
   const isValidURL = urlValidation.test(inputURL);
 
   const firebaseUser = firebaseAuth.currentUser;
-  if (!firebaseUser) throw new Error("No current user");
+  if (!firebaseUser) {
+    console.error("No current user");
+  }
   function handleCreateCalendar() {
     createCalender(
       {
@@ -97,6 +99,7 @@ const URLPopup = () => {
               onClick={() => {
                 handleCreateCalendar();
                 handleClose();
+                //りだいれくと
               }}
               disabled={!isValidURL || calenderName === ""}
               type='submit'

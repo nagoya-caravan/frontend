@@ -7,6 +7,7 @@ export function createCalender(calender: Calender, firebaseUser) {
     undefined,
     calender,
     "POST",
+    undefined,
     firebaseUser.uid
   );
 }
@@ -18,6 +19,17 @@ export function editCalender(calender_id: number, calender: Calender) {
 export function getCalenderList(calender: Calender) {
   return fetchJson("/api/calender", undefined, calender, "GET");
 }
+
+// export function refreshCalender(calender_id: number,firebaseUser) {
+//   return fetchJson(
+//     `/api/calender/${calender_id}/refresh`,
+//     undefined,
+//     undefined,
+//     "POST"
+//     firebaseUser.uid,
+//     undefined
+//   );
+// }
 
 export async function getUser(firebaseUser) {
   const user = await fetchJson<LsUser, undefined>(
