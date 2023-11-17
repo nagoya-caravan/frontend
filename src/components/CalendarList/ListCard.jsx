@@ -39,83 +39,63 @@ const CalendarListCard = () => {
   return (
     <Box>
       <Grid container spacing={5}>
-        {data.map(
-          (item) => (
-            console.log(item),
-            (
-              <Grid
-                item
-                key={data.calender_name}
-                sx={{
-                  width: "100%",
-                  margin: "30px auto 30px auto",
-                }}
-              >
-                <Paper
+        {data.map((item) => (
+          <Grid
+            item
+            key={item.calender_name}
+            sx={{
+              width: "100%",
+              margin: "30px auto 30px auto",
+            }}
+          >
+            <Paper
+              sx={{
+                margin: "0 auto 0 auto",
+                padding: "20px 100px 20px 30px",
+                width: "65%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                flexWrap: "wrap",
+              }}
+            >
+              <Box>
+                <Typography
                   sx={{
-                    margin: "0 auto 0 auto",
-                    padding: "20px 100px 20px 30px",
-                    width: "65%",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    flexWrap: "wrap",
+                    display: "inline",
+                    opacity: 0.65,
+                    fontSize: "1.3rem",
                   }}
                 >
-                  <Box>
-                    <Typography
-                      sx={{
-                        display: "inline",
-                        opacity: 0.65,
-                        fontSize: "1.3rem",
-                      }}
-                    >
-                      カレンダー名：
-                    </Typography>
-                    <Typography sx={{ display: "inline", fontSize: "1.3rem" }}>
-                      {item.calender_name}
-                    </Typography>
-                  </Box>
+                  カレンダー名：
+                </Typography>
+                <Typography sx={{ display: "inline", fontSize: "1.3rem" }}>
+                  {item.calender_name}
+                </Typography>
+              </Box>
 
-                  <Box>
-                    <Typography
-                      sx={{
-                        display: "inline",
-                        opacity: 0.65,
-                        fontSize: "1.3rem",
-                      }}
-                    >
-                      作成者：
-                    </Typography>
-                    <Typography sx={{ display: "inline", fontSize: "1.3rem" }}>
-                      {firebaseUser.displayName}
-                    </Typography>
-                  </Box>
-
-                  <Box>
-                    <IconButton>
-                      <ShareIcon fontSize='large' />
-                    </IconButton>
-                  </Box>
-                  <Box>
-                    <IconButton>
-                      <DeleteIcon fontSize='large' />
-                    </IconButton>
-                  </Box>
-                  <Box>
-                    <Button
-                      onClick={() => {
-                        handleItemClick(item.user_id);
-                      }}
-                    >
-                      編集
-                    </Button>
-                  </Box>
-                </Paper>
-              </Grid>
-            )
-          )
-        )}
+              <Box>
+                <IconButton>
+                  <ShareIcon fontSize='large' />
+                </IconButton>
+              </Box>
+              <Box>
+                <IconButton>
+                  <DeleteIcon fontSize='large' />
+                </IconButton>
+              </Box>
+              <Box>
+                <Button
+                  onClick={() => {
+                    handleItemClick(item.user_id);
+                  }}
+                >
+                  編集
+                </Button>
+              </Box>
+            </Paper>
+          </Grid>
+        ))}
       </Grid>
     </Box>
   );
