@@ -22,8 +22,6 @@ const handleGoogleLogin = async () => {
     if (!firebaseUser) throw new Error("No current user");
     // ユーザー情報の取得
     await getUser(firebaseUser);
-    //リダイレクト処理
-    window.location.href = "/calendar";
     console.log("Google login successful");
   } catch (error) {
     console.error("Google login failed:", error);
