@@ -11,7 +11,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { getCalenderList } from "../../api/apis";
 import { useState, useEffect } from "react";
 import { firebaseAuth } from "../../utils/firebaseConfig";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 const CalendarListCard = () => {
   const firebaseUser = firebaseAuth.currentUser;
