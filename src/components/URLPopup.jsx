@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-
+import { useState } from "react";
 import {
   IconButton,
   Button,
@@ -9,34 +8,36 @@ import {
   Box,
 } from "@mui/material";
 import { createCalender } from "../api/apis";
-import { firebaseAuth } from "../utils/firebaseConfig";
 import AddIcon from "@mui/icons-material/Add";
+import { firebaseAuth } from "../utils/firebaseConfig";
 const URLPopup = () => {
   const [open, setOpen] = useState(false);
   const [inputURL, setInputURL] = useState("");
-  const [calendarName, setCalendarName] = useState("");
+  const [calenderName, setCalenderName] = useState("");
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   const urlValidation = /^(https?:\/\/).*/;
   const isValidURL = urlValidation.test(inputURL);
-  useEffect(() => {}, [inputURL, calendarName]);
-  if (!firebaseAuth.currentUser?.uid) {
-    console.log("ログインしてください");
-  } else {
-    console.log(firebaseAuth.currentUser?.uid);
-  }
-  try {
-    createCalender({
-      ical_url: inputURL,
-      calender_name: calendarName,
-      user_token: firebaseAuth.currentUser?.uid,
-    });
-  } catch (error) {
-    console.log(error);
-  }
 
+  const firebaseUser = firebaseAuth.currentUser;
+  if (!firebaseUser) throw new Error("No current user");
+  function handleCreateCalendar() {
+    createCalender(
+      {
+        ical_url: inputURL,
+        calender_name: calenderName,
+      },
+      firebaseUser
+    )
+      .then(() => {
+        console.log("カレンダーを作成しました");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
   return (
     <>
       <IconButton variant='outlined' onClick={handleOpen}>
@@ -81,8 +82,8 @@ const URLPopup = () => {
             <Input
               sx={{ mt: 3 }}
               placeholder='カレンダー名'
-              value={calendarName}
-              onChange={(e) => setCalendarName(e.target.value)}
+              value={calenderName}
+              onChange={(e) => setCalenderName(e.target.value)}
             />
           </Box>
           <Box>
@@ -94,13 +95,10 @@ const URLPopup = () => {
               }}
               variant='contained'
               onClick={() => {
-                createCalender({
-                  ical_url: inputURL,
-                  calender_name: calendarName,
-                });
+                handleCreateCalendar();
                 handleClose();
               }}
-              disabled={!isValidURL || calendarName === ""}
+              disabled={!isValidURL || calenderName === ""}
               type='submit'
             >
               作成

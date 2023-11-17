@@ -1,8 +1,14 @@
 import { Calender, ErrorIds, LsUser } from "./objects";
 import { ApiError, fetchJson } from "./fetch";
 
-export function createCalender(calender: Calender, uid) {
-  return fetchJson("/api/calender", undefined, calender, "POST");
+export function createCalender(calender: Calender, firebaseUser) {
+  return fetchJson(
+    "/api/calender",
+    undefined,
+    calender,
+    "POST",
+    firebaseUser.uid
+  );
 }
 
 export function editCalender(calender_id: number, calender: Calender) {
