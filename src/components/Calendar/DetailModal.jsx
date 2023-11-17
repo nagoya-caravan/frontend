@@ -1,17 +1,8 @@
 import * as React from "react";
-import {
-  Box,
-  Button,
-  Modal,
-  Typography,
-  Grid,
-  CardContent,
-  Chip,
-} from "@mui/material";
+import {Box, CardContent, Chip, Grid, Modal, Typography} from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import EventIcon from "@mui/icons-material/Event";
-import LockOpenIcon from "@mui/icons-material/LockOpen";
 
 // タイトル、日付、要件、一般公開（チェックボックスをつける）、submitボタンをつける
 
@@ -29,7 +20,8 @@ const style = {
   pb: 3,
 };
 
-export default function DetailModal() {
+export default function DetailModal(props) {
+  const {eventData} = props;
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => {
     setOpen(true);
@@ -48,20 +40,20 @@ export default function DetailModal() {
           mx: "auto",
           zIndex: 1,
         }}
-      >
-        予定
-      </Chip>
+        label={eventData.event_title || "予定"}
+      />
+
       <Modal
         open={open}
         onClose={handleClose}
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-        <Box sx={{ ...style, width: 400 }}>
+        <Box sx={{...style, width: 400}}>
           <Grid item xs={3}>
             {/* カードのペーパーコンポーネント */}
 
-            <Box sx={{ textAlign: "right", margin: "0 30px -20px 0" }}>
+            <Box sx={{textAlign: "right", margin: "0 30px -20px 0"}}>
               <CloseIcon
                 sx={{
                   display: "inline-block",
@@ -75,9 +67,9 @@ export default function DetailModal() {
               <Typography
                 variant="h4"
                 gutterBottom
-                sx={{ margin: "10px 0 30px 0" }}
+                sx={{margin: "10px 0 30px 0"}}
               >
-                予定タイトル
+                {eventData.event_title || "予定"}
               </Typography>
               {/* 日付 */}
               <Box
@@ -94,10 +86,10 @@ export default function DetailModal() {
                     marginRight: "10px",
                   }}
                 />
-                <Typography>日付：{"2023/11/15"}</Typography>
+                <Typography>開始：{eventData.start.toString()}</Typography>
               </Box>
 
-              {/* カードタイトル */}
+              {/* 日付 */}
               <Box
                 sx={{
                   display: "flex",
@@ -105,33 +97,40 @@ export default function DetailModal() {
                   marginTop: "20px",
                 }}
               >
-                <EventIcon sx={{ marginRight: "10px" }} />
-                <Typography variant="h6">予定内容： </Typography>
+                <CalendarMonthIcon
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    marginRight: "10px",
+                  }}
+                />
+                <Typography>終了：{eventData.end.toString()}</Typography>
               </Box>
 
-              {/* カード詳細 */}
-              <Box
+              {/* 説明 */}
+              {eventData.description && <Box
                 sx={{
                   display: "flex",
                   alignItems: "center",
                   marginTop: "20px",
                 }}
               >
-                <LockOpenIcon sx={{ marginRight: "10px" }} />
-                <Typography variant="h7" color="textSecondary">
-                  公開：
-                  <input type="checkbox" style={{ lineHeight: 0 }} />
-                </Typography>
-              </Box>
+                <EventIcon sx={{marginRight: "10px"}}/>
+                <Typography variant="h6">予定内容： {eventData.description}</Typography>
+              </Box>}
+              {/* 場所 */}
+              {eventData.location && <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  marginTop: "20px",
+                }}
+              >
+                <EventIcon sx={{marginRight: "10px"}}/>
+                <Typography variant="h6">場所： {eventData.location}</Typography>
+              </Box>}
 
-              <Box sx={{ textAlign: "right" }}>
-                <Button
-                  variant="outlined"
-                  sx={{ display: "inline-block", position: "relative" }}
-                >
-                  設定
-                </Button>
-              </Box>
+
             </CardContent>
           </Grid>
         </Box>
