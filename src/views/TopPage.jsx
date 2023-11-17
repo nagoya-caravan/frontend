@@ -10,13 +10,13 @@ const TopPage = () => {
   const handleListRedirect = async () => {
     try {
       await handleGoogleLogin();
-      navigate("/calendar/7");
+      navigate("/calendar/list");
     } catch (error) {
       console.error("Google login failed:", error);
     }
   };
   const [firebaseUser, seuFirebaseUser] = useState(firebaseAuth.currentUser);
-  return firebaseUser ? <Navigate to={"/calendar/7"}/>
+  return firebaseUser ? <Navigate to={"/calendar/list"}/>
     : (
       <>
         <Box
