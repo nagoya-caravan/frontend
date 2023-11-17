@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import {
   IconButton,
@@ -8,8 +8,9 @@ import {
   Modal,
   Box,
 } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
 import { createCalender } from "../api/apis";
+import { firebaseAuth } from "../utils/firebaseConfig";
+import AddIcon from "@mui/icons-material/Add";
 const URLPopup = () => {
   const [open, setOpen] = useState(false);
   const [inputURL, setInputURL] = useState("");
@@ -20,6 +21,21 @@ const URLPopup = () => {
 
   const urlValidation = /^(https?:\/\/).*/;
   const isValidURL = urlValidation.test(inputURL);
+  useEffect(() => {}, [inputURL, calendarName]);
+  if (!firebaseAuth.currentUser?.uid) {
+    console.log("ログインしてください");
+  } else {
+    console.log(firebaseAuth.currentUser?.uid);
+  }
+  try {
+    createCalender({
+      ical_url: inputURL,
+      calender_name: calendarName,
+      user_token: firebaseAuth.currentUser?.uid,
+    });
+  } catch (error) {
+    console.log(error);
+  }
 
   return (
     <>
@@ -77,18 +93,15 @@ const URLPopup = () => {
                 left: "30%",
               }}
               variant='contained'
-              onClick={
-                isValidURL
-                  ? () => {
-                      setOpen(false);
-                      createCalender({
-                        calender_name: calendarName,
-                        ical_url: inputURL,
-                      });
-                    }
-                  : () => {}
-              }
+              onClick={() => {
+                createCalender({
+                  ical_url: inputURL,
+                  calender_name: calendarName,
+                });
+                handleClose();
+              }}
               disabled={!isValidURL || calendarName === ""}
+              type='submit'
             >
               作成
             </Button>
