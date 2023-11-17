@@ -16,8 +16,15 @@ export function editCalender(calender_id: number, calender: Calender) {
   return fetchJson(`/api/calender/${calender_id}`, undefined, calender, "PUT");
 }
 
-export function getCalenderList(calender: Calender) {
-  return fetchJson("/api/calender", undefined, calender, "GET");
+export function getCalenderList(calender: Calender, firebaseUser) {
+  return fetchJson(
+    "/api/calender",
+    undefined,
+    calender,
+    "GET",
+    undefined,
+    firebaseUser.uid
+  );
 }
 
 export function refreshCalender(calender_id: number, firebaseUser) {
