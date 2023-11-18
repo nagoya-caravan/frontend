@@ -11,7 +11,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { getCalenderList } from "../../api/apis";
 import { useState, useEffect } from "react";
 import { firebaseAuth } from "../../utils/firebaseConfig";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const CalendarListCard = () => {
   const firebaseUser = firebaseAuth.currentUser;
@@ -26,10 +26,6 @@ const CalendarListCard = () => {
         console.error(reason.apiErrorResponse.message);
       });
   }, [calendars]);
-  const navigate = useNavigate();
-  const handleItemClick = (calendar_id) => {
-    navigate(`/calendar/${calendar_id}`);
-  };
 
   console.log(calendars);
   const data = calendars;
@@ -85,15 +81,9 @@ const CalendarListCard = () => {
                     </IconButton>
                   </Box>
                   <Box>
-                    <Button
-                      onClick={() => {
-                        {
-                          handleItemClick(item.calendar_id);
-                        }
-                      }}
-                    >
-                      編集
-                    </Button>
+                    <Link to={`/calendar/${item.calender_id}`}>
+                      <Button>編集</Button>
+                    </Link>
                   </Box>
                 </Paper>
               </Grid>
