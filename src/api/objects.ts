@@ -26,12 +26,17 @@ export interface CalenderEvent {
   event_id: number | undefined;
 }
 
+export interface EventEdit {
+  is_show: boolean;
+}
+
 export interface LsUser {
   user_name?: string;
   user_token: string;
 }
 
-export interface Empty {}
+export interface Empty {
+}
 
 export enum ErrorIds {
   USER_NOT_FOUND = "USER_NOT_FOUND",

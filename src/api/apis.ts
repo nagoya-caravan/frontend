@@ -1,5 +1,5 @@
-import { Calender, ErrorIds, LsUser } from "./objects";
-import { ApiError, fetchJson } from "./fetch";
+import {Calender, ErrorIds, EventEdit, LsUser} from "./objects";
+import {ApiError, FetchBuilder, fetchJson} from "./fetch";
 
 export function createCalender(calender: Calender, firebaseUser) {
   return fetchJson(
@@ -8,7 +8,7 @@ export function createCalender(calender: Calender, firebaseUser) {
     calender,
     "POST",
     undefined,
-    firebaseUser.uid
+    firebaseUser.uid,
   );
 }
 
@@ -23,7 +23,7 @@ export function getCalenderList(calender: Calender, firebaseUser) {
     calender,
     "GET",
     undefined,
-    firebaseUser.uid
+    firebaseUser.uid,
   );
 }
 
@@ -34,8 +34,16 @@ export function refreshCalender(calender_id: number, firebaseUser) {
     undefined,
     "POST",
     undefined,
-    firebaseUser.uid
+    firebaseUser.uid,
   );
+}
+
+export function editEvent(eventId: number, firebaseUser, isShow: boolean) {
+  return new FetchBuilder<never, EventEdit>(`/api/event/${eventId}`)
+    .token(firebaseUser.uid)
+    .method("PUT")
+    .body({is_show: isShow})
+    .fetch();
 }
 
 export async function getUser(firebaseUser) {
@@ -45,7 +53,7 @@ export async function getUser(firebaseUser) {
     undefined,
     "GET",
     undefined,
-    firebaseUser.uid
+    firebaseUser.uid,
   ).catch((reason) => {
     if (
       (reason as ApiError).apiErrorResponse.error_id == ErrorIds.USER_NOT_FOUND
@@ -59,8 +67,8 @@ export async function getUser(firebaseUser) {
       user_name: firebaseUser.displayName,
       user_token: firebaseUser.uid,
     }).catch((reason: ApiError) => {
-      console.error(reason.apiErrorResponse.message)
-      throw reason
+      console.error(reason.apiErrorResponse.message);
+      throw reason;
     });
   }
 }

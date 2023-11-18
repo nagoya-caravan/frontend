@@ -26,7 +26,7 @@ export function CalendarEvents(props) {
     } else setLastDatetime(datetimeLast(year, month, week[6].date),
     );
   }, [year, month, week, isFirstWeek, isLastWeek]);
-  const events = useEvents(
+  const [events, reload] = useEvents(
     firebaseUser, calendar_id, firstDatetime, lastDatetime,
   );
 
@@ -37,7 +37,7 @@ export function CalendarEvents(props) {
     while (restEvents.length > 0) {
       console.log("while");
       if (position >= 7) position = 0;
-      console.log(position)
+      console.log(position);
       const currentDate = week[position].date;
       if (firstDatetime == null) break;
       const i = restEvents.findIndex(value => {
@@ -74,7 +74,7 @@ export function CalendarEvents(props) {
                 + "px",
             }}
             key={index}>
-            <DetailModal eventData={value}/>
+            <DetailModal eventData={value} editable reload={reload}/>
           </Box>
           : <Box sx={{
             width: (width / 7) + "px",
