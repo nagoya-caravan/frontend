@@ -7,6 +7,7 @@ import { useState } from "react";
 import logo from "../assets/img/logo.png";
 import outlook from "../assets/img/outlook_logo.png";
 import googleCalerndar from "../assets/img/google_calendar.png";
+import iCal from "../assets/img/iCal.png";
 
 const TopPage = () => {
   const navigate = useNavigate();
@@ -69,6 +70,26 @@ const TopPage = () => {
             alt="googleカレンダー"
             style={{
               padding: "0 20px",
+              height: "50px",
+              width: "50px",
+            }}
+          />
+          <img
+            src={iCal}
+            alt="iCal"
+            style={{
+              padding: "0 20px",
+              height: "50px",
+              width: "50px",
+            }}
+          />
+          <img
+            src={outlook}
+            alt="outlook"
+            style={{
+              padding: "0 20px",
+              height: "50px",
+              width: "50px",
             }}
           />
         </Box>
