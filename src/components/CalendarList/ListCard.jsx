@@ -1,16 +1,9 @@
-import {
-  Box,
-  Grid,
-  Typography,
-  Paper,
-  IconButton,
-  Button,
-} from "@mui/material";
+import {Box, Button, Grid, IconButton, Paper, Typography} from "@mui/material";
 import ShareIcon from "@mui/icons-material/Share";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { getCalenderList } from "../../api/apis";
-import { useState, useEffect } from "react";
-import { firebaseAuth } from "../../utils/firebaseConfig";
+import {getCalenderList} from "../../api/apis";
+import {useEffect, useState} from "react";
+import {firebaseAuth} from "../../utils/firebaseConfig";
 // import { useNavigate } from "react-router-dom";
 
 const CalendarListCard = () => {
@@ -21,6 +14,7 @@ const CalendarListCard = () => {
     getCalenderList(undefined, firebaseUser)
       .then((calendars) => {
         setCalendars(calendars);
+        console.log("fetch calenders", calendars);
       })
       .then(() => {
         if (!firebaseUser) throw new Error("User is not logged in");
@@ -69,19 +63,19 @@ const CalendarListCard = () => {
                 >
                   カレンダー名：
                 </Typography>
-                <Typography sx={{ display: "inline", fontSize: "1.3rem" }}>
+                <Typography sx={{display: "inline", fontSize: "1.3rem"}}>
                   {item.calender_name}
                 </Typography>
               </Box>
 
               <Box>
                 <IconButton>
-                  <ShareIcon fontSize='large' />
+                  <ShareIcon fontSize="large"/>
                 </IconButton>
               </Box>
               <Box>
                 <IconButton>
-                  <DeleteIcon fontSize='large' />
+                  <DeleteIcon fontSize="large"/>
                 </IconButton>
               </Box>
               <Box>

@@ -43,6 +43,8 @@ class EventData {
 
 export function useEvents(firebaseUser, calenderId, firstDatetime, lastDatetime) {
   const [events, setEvents] = useState([]);
+  const [reloadFlag, setReloadFlag] = useState(false);
+
 
   useEffect(() => {
     const search = new URLSearchParams();
@@ -61,6 +63,6 @@ export function useEvents(firebaseUser, calenderId, firstDatetime, lastDatetime)
         console.log("event fetched!", values);
       })
       .catch(reason => console.error(reason.apiErrorResponse ? reason.apiErrorResponse.message : reason));
-  }, [firebaseUser, calenderId, firstDatetime, lastDatetime]);
-  return events;
+  }, [firebaseUser, calenderId, firstDatetime, lastDatetime, reloadFlag]);
+  return [events, () => setReloadFlag(!reloadFlag)];
 }
