@@ -1,5 +1,4 @@
 import * as React from "react";
-import {useState} from "react";
 import {Box, Button, CardContent, Chip, Grid, Modal, Typography} from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
@@ -25,7 +24,7 @@ const style = {
 };
 
 export default function DetailModal(props) {
-  const {eventData, editable,reload} = props;
+  const {eventData, editable, reload} = props;
   const [open, setOpen] = React.useState(false);
   const firebaseUser = firebaseAuth.currentUser;
   if (firebaseUser == null) return <Navigate to={"/"}/>;
@@ -40,9 +39,16 @@ export default function DetailModal(props) {
     <Chip
       onClick={handleOpen}
       sx={{
-        width: "90%", mt: 1, mx: "auto", zIndex: 1,
+        width: "90%",
+        mt: 1, mx: "auto", zIndex: 1,
+        backgroundColor: eventData.is_show ? "rgb(189, 231, 138)" : "#bbb",
+        "&:hover": {
+          backgroundColor: eventData.is_show ? "rgb(189, 231, 138)" : "#bbb",
+          opacity: "0.5",
+        },
       }}
       label={eventData.event_title || "予定"}
+
     />
 
     <Modal
