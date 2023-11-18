@@ -22,8 +22,8 @@ const CalendarListCard = () => {
       .then((calendars) => {
         setCalendars(calendars);
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((reason) => {
+        console.error(reason.apiErrorResponse.message);
       });
   }, [calendars]);
   const navigate = useNavigate();
