@@ -1,10 +1,10 @@
 import {ApiErrorResponse} from "./objects";
 
-// const Access_Control_Allow_Origin = "hazakura-api-test.kigawa.net"
-// const BASE_URL = "https://hazakura-api-test.kigawa.net/"
+const Access_Control_Allow_Origin = "hazakura-api-test.kigawa.net"
+const BASE_URL = "https://hazakura-api-test.kigawa.net/"
 
-const Access_Control_Allow_Origin = "127.0.0.1:5000"
-const BASE_URL = "http://127.0.0.1:5000/"
+// const Access_Control_Allow_Origin = "127.0.0.1:5000"
+// const BASE_URL = "http://127.0.0.1:5000/"
 
 export class JsonError extends Error {
   url: URL | undefined
