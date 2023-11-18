@@ -9,6 +9,7 @@ import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrow
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
+import RefreshButton from "./RefreshButton.jsx";
 // 月初めの日付と曜日を計算する関数
 
 // カレンダーコンポーネントの利用例
@@ -77,6 +78,7 @@ const Calendar = () => {
         <IconButton variant="outlined" onClick={handleNextYear}>
           <KeyboardDoubleArrowRightIcon fontSize="large" />
         </IconButton>
+        <RefreshButton/>
       </Box>
       <Box
         sx={{
