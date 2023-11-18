@@ -62,7 +62,7 @@ export function CalendarEvents(props) {
   const element = weekElementRef.current;
   const width = element ? element.offsetWidth : 0;
   return (
-    <Box sx={{position: "absolute", top: 0, left: 0, display: "flex", flexWrap: "wrap"}}>
+    <Box sx={{position: "absolute", top: "28px", left: 0, display: "flex", flexWrap: "wrap"}}>
       {eventList.map((value, index) => {
         return value
           ? <Box
@@ -72,6 +72,7 @@ export function CalendarEvents(props) {
                   * value.datePeriod(firstDatetime)
                 )
                 + "px",
+              textAlign: "center",
             }}
             key={index}>
             <DetailModal eventData={value} editable reload={reload}/>
