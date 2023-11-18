@@ -1,15 +1,21 @@
-import {Box} from "@mui/material";
-import {CalendarEvents} from "./CalendarEvents.jsx";
-import {useRef} from "react";
+import { Box } from "@mui/material";
+import { CalendarEvents } from "./CalendarEvents.jsx";
+import { useRef } from "react";
 
 const WeekRow = (props) => {
-  const {year, month, week, isFirstWeek, isLastWeek} = props;
+  const { year, month, week, isFirstWeek, isLastWeek } = props;
   const weekElementRef = useRef();
 
   //ここでapiからデータを取得
   return (
-    <Box sx={{border: "2px #999 solid", margin: "0 0 -2px", position: "relative"}}>
-      <Box display={{xs: "none", md: "flex"}} ref={weekElementRef}>
+    <Box
+      sx={{
+        border: "2px #999 solid",
+        margin: "0 0 -2px",
+        position: "relative",
+      }}
+    >
+      <Box display={{ xs: "none", md: "flex" }} ref={weekElementRef}>
         {week.map((day) => (
           <Box
             key={day.date}
@@ -19,7 +25,7 @@ const WeekRow = (props) => {
               width: "40%",
             }}
           >
-            <Box sx={{padding: "10px 0 0 10px"}}>{day.date}</Box>
+            <Box sx={{ padding: "10px 0 0 10px" }}>{day.date}</Box>
 
             {/*<Box sx={{textAlign: "center"}}>*/}
             {/*  <DetailModal/>*/}
@@ -27,8 +33,14 @@ const WeekRow = (props) => {
           </Box>
         ))}
       </Box>
-      <CalendarEvents year={year} month={month} week={week} isFirstWeek={isFirstWeek} isLastWeek={isLastWeek}
-                      weekElementRef={weekElementRef}/>
+      <CalendarEvents
+        year={year}
+        month={month}
+        week={week}
+        isFirstWeek={isFirstWeek}
+        isLastWeek={isLastWeek}
+        weekElementRef={weekElementRef}
+      />
     </Box>
   );
 };
