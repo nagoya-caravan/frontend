@@ -32,7 +32,7 @@ export function refreshCalender(calender_id: number, firebaseUser) {
     `/api/calender/${calender_id}/refresh`,
     undefined,
     undefined,
-    "POST",
+    "GET",
     undefined,
     firebaseUser.uid,
   );
