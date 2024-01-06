@@ -1,5 +1,8 @@
+import Routing from "./Routing";
+import "@fontsource/roboto/300.css";
+
 function App() {
-  return <div>aaa</div>;
+  return <Routing />;
 }
 
 export default App;
