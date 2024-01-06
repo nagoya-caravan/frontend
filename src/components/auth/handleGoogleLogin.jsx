@@ -1,23 +1,30 @@
-import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { firebaseAuth } from "../../utils/firebaseConfig";
-import { getUser } from "../../api/apis";
+import { useContext } from "react";
+import { Button } from "@mui/material";
+import { AuthContext } from "@/store/AuthContext";
 
-const handleGoogleLogin = async () => {
-  const provider = new GoogleAuthProvider();
+export const LoginButton = () => {
+  const { login } = useContext(AuthContext);
 
-  // ログイン状態の永続化を設定
-  try {
-    // Googleでのログイン処理
-    await signInWithPopup(firebaseAuth, provider);
-    const firebaseUser = firebaseAuth.currentUser;
+  const handleLogin = async () => {
+    try {
+      await login();
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
-    if (!firebaseUser) throw new Error("No current user");
-    // ユーザー情報の取得
-    await getUser(firebaseUser);
-    console.log("Google login successful");
-  } catch (error) {
-    console.error("Google login failed:", error);
-  }
+  return (
+    <Button
+      sx={{
+        color: "#fff",
+        "&:hover": {
+          backgroundColor: "transparent",
+          opacity: [0.9, 0.8, 0.7],
+        },
+      }}
+      onClick={handleLogin}
+    >
+      GoogleLogin
+    </Button>
+  );
 };
-
-export default handleGoogleLogin;
